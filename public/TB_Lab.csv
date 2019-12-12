@@ -1,0 +1,433 @@
+﻿country,region,year,new.pul.TB,prev.treated.pul.TB,prev.unk.pul.TB,new.MDR,prev.MDR,MDR.tested,XDR
+Afghanistan,EMR,2017,19354,2233,125,,,,5
+Afghanistan,EMR,2018,20485,1712,,,10,10,8
+Albania,EUR,2017,195,15,0,0,0,0,0
+Albania,EUR,2018,198,10,0,1,1,,
+Algeria,AFR,2017,6278,419,0,11,28,39,4
+Algeria,AFR,2018,6137,362,21,2,5,7,4
+American Samoa,WPR,2017,3,0,0,1,0,1,0
+American Samoa,WPR,2018,0,1,0,0,0,0,0
+Andorra,EUR,2017,1,0,0,0,0,0,0
+Andorra,EUR,2018,2,0,0,0,,0,0
+Angola,AFR,2017,24490,3476,,0,0,0,0
+Angola,AFR,2018,31098,6623,0,0,0,0,0
+Anguilla,AMR,2017,,,,,,,
+Anguilla,AMR,2018,,,,,,,
+Antigua and Barbuda,AMR,2017,1,0,0,0,,0,0
+Antigua and Barbuda,AMR,2018,2,0,0,0,0,0,0
+Argentina,AMR,2017,5287,902,376,30,61,90,6
+Argentina,AMR,2018,5694,1248,312,68,66,120,9
+Armenia,EUR,2017,326,128,0,40,41,81,13
+Armenia,EUR,2018,254,104,0,43,33,76,14
+Aruba,AMR,2017,2,0,0,,,,
+Aruba,AMR,2018,5,0,0,,,,
+Australia,WPR,2017,745,34,1,12,6,16,0
+Australia,WPR,2018,763,43,4,21,4,22,1
+Austria,EUR,2017,293,16,76,11,2,13,2
+Austria,EUR,2018,232,23,72,10,3,13,0
+Azerbaijan,EUR,2017,2023,2900,,170,495,,
+Azerbaijan,EUR,2018,1988,2836,,160,478,,
+Bahamas,AMR,2017,16,0,0,0,0,0,0
+Bahamas,AMR,2018,18,0,0,0,0,0,0
+Bahrain,EMR,2017,80,0,0,1,,0,0
+Bahrain,EMR,2018,79,1,0,3,0,,
+Bangladesh,SEA,2017,140752,5107,3,15,105,76,0
+Bangladesh,SEA,2018,149751,6035,3,4,10,14,6
+Barbados,AMR,2017,0,0,0,0,0,0,0
+Barbados,AMR,2018,1,0,0,0,0,0,0
+Belarus,EUR,2017,1690,700,0,629,459,1088,343
+Belarus,EUR,2018,1529,612,0,559,425,984,185
+Belgium,EUR,2017,465,42,98,1,2,3,0
+Belgium,EUR,2018,476,46,74,5,1,6,3
+Belize,AMR,2017,68,8,0,,,1,0
+Belize,AMR,2018,55,7,0,0,0,0,0
+Benin,AFR,2017,2783,259,0,0,4,4,0
+Benin,AFR,2018,3148,236,0,,,0,0
+Bermuda,AMR,2017,1,0,0,0,0,0,0
+Bermuda,AMR,2018,2,0,0,0,0,0,0
+Bhutan,SEA,2017,402,47,0,47,3,8,0
+Bhutan,SEA,2018,396,48,1,46,1,47,0
+Bolivia (Plurinational State of),AMR,2017,4978,516,0,37,14,38,0
+Bolivia (Plurinational State of),AMR,2018,5303,319,0,41,19,59,1
+"Bonaire, Saint Eustatius and Saba",AMR,2017,,,,,,,
+"Bonaire, Saint Eustatius and Saba",AMR,2018,,,,,,,
+Bosnia and Herzegovina,EUR,2017,434,45,0,0,0,,
+Bosnia and Herzegovina,EUR,2018,410,38,,0,0,,
+Botswana,AFR,2017,1129,122,858,,,,
+Botswana,AFR,2018,,,,,,,
+Brazil,AMR,2017,45341,9359,142,,,112,16
+Brazil,AMR,2018,48150,9936,142,,,127,6
+British Virgin Islands,AMR,2017,,,,,,,
+British Virgin Islands,AMR,2018,,,1,,,,
+Brunei Darussalam,WPR,2017,170,9,0,0,0,0,0
+Brunei Darussalam,WPR,2018,197,4,0,0,0,0,0
+Bulgaria,EUR,2017,619,102,0,13,11,23,1
+Bulgaria,EUR,2018,549,92,0,10,14,24,0
+Burkina Faso,AFR,2017,3613,429,2,14,34,31,1
+Burkina Faso,AFR,2018,3936,341,11,15,25,40,0
+Burundi,AFR,2017,4501,314,0,0,50,50,0
+Burundi,AFR,2018,4071,241,0,,50,50,0
+Cabo Verde,AFR,2017,163,23,0,0,0,0,0
+Cabo Verde,AFR,2018,138,21,0,0,0,0,0
+Cambodia,WPR,2017,11482,609,1,,,,
+Cambodia,WPR,2018,9370,478,0,,,,
+Cameroon,AFR,2017,13448,378,0,36,24,60,0
+Cameroon,AFR,2018,13460,1250,0,70,47,117,1
+Canada,AMR,2017,,,,11,0,8,0
+Canada,AMR,2018,,,,11,1,11,1
+Cayman Islands,AMR,2017,3,,,0,0,0,0
+Cayman Islands,AMR,2018,3,0,0,0,0,0,0
+Central African Republic,AFR,2017,4882,419,0,0,0,0,0
+Central African Republic,AFR,2018,5302,305,0,0,16,0,0
+Chad,AFR,2017,4732,626,0,0,0,0,0
+Chad,AFR,2018,5015,670,0,0,0,0,0
+Chile,AMR,2017,1910,118,0,18,1,19,0
+Chile,AMR,2018,2012,216,0,26,6,32,0
+China,WPR,2017,212914,27873,,5339,4248,,
+China,WPR,2018,249251,34990,0,4036,4322,,
+"China, Hong Kong SAR",WPR,2017,2285,194,7,14,8,22,0
+"China, Hong Kong SAR",WPR,2018,2734,266,5,25,11,32,1
+"China, Macao SAR",WPR,2017,241,25,14,1,0,1,0
+"China, Macao SAR",WPR,2018,205,26,8,4,3,7,0
+Colombia,AMR,2017,8329,892,0,79,51,75,1
+Colombia,AMR,2018,9759,1142,,68,50,56,1
+Comoros,AFR,2017,48,7,0,0,0,,
+Comoros,AFR,2018,,,,,,,
+Congo,AFR,2017,3806,258,0,0,,0,0
+Congo,AFR,2018,3823,333,0,0,0,0,0
+Cook Islands,WPR,2017,0,0,0,0,0,0,0
+Cook Islands,WPR,2018,0,0,0,0,0,0,0
+Costa Rica,AMR,2017,294,24,0,4,0,4,0
+Costa Rica,AMR,2018,325,20,0,3,0,3,0
+C√¥te d'Ivoire,AFR,2017,13349,1294,0,25,134,159,8
+C√¥te d'Ivoire,AFR,2018,13431,1135,0,62,150,17,3
+Croatia,EUR,2017,237,16,40,0,0,,
+Croatia,EUR,2018,241,19,46,1,1,1,0
+Cuba,AMR,2017,469,73,0,1,4,4,0
+Cuba,AMR,2018,478,81,0,3,11,14,0
+Cura√ßao,AMR,2017,8,0,0,0,0,0,0
+Cura√ßao,AMR,2018,,,,,,,
+Cyprus,EUR,2017,38,0,1,1,0,1,0
+Cyprus,EUR,2018,33,1,1,0,0,,
+Czechia,EUR,2017,345,24,0,3,3,6,2
+Czechia,EUR,2018,322,28,0,10,0,10,0
+Democratic People's Republic of Korea,SEA,2017,,,,,,,
+Democratic People's Republic of Korea,SEA,2018,28546,12765,0,,500,,
+Democratic Republic of the Congo,AFR,2017,93555,5871,0,9,277,286,1
+Democratic Republic of the Congo,AFR,2018,103881,5693,0,48,80,126,3
+Denmark,EUR,2017,159,16,0,1,0,1,0
+Denmark,EUR,2018,166,15,0,4,0,4,0
+Djibouti,EMR,2017,939,133,0,0,,,
+Djibouti,EMR,2018,951,96,0,0,3,3,3
+Dominica,AMR,2017,1,0,0,0,0,0,0
+Dominica,AMR,2018,1,1,0,0,0,0,0
+Dominican Republic,AMR,2017,1888,316,0,27,20,43,0
+Dominican Republic,AMR,2018,1908,301,0,33,14,43,0
+Ecuador,AMR,2017,,,,,,,
+Ecuador,AMR,2018,4323,277,,,,,
+Egypt,EMR,2017,3417,385,0,4,90,30,0
+Egypt,EMR,2018,3882,456,0,6,82,38,0
+El Salvador,AMR,2017,2735,295,0,3,0,,
+El Salvador,AMR,2018,2530,363,0,0,2,,
+Equatorial Guinea,AFR,2017,784,92,17,,,0,0
+Equatorial Guinea,AFR,2018,755,84,0,,,,
+Eritrea,AFR,2017,698,104,0,,,,
+Eritrea,AFR,2018,664,84,0,6,0,6,0
+Estonia,EUR,2017,124,21,0,26,10,34,9
+Estonia,EUR,2018,105,20,0,22,8,30,8
+Eswatini,AFR,2017,2041,152,2,32,25,57,10
+Eswatini,AFR,2018,1754,290,2,20,21,41,2
+Ethiopia,AFR,2017,43113,3035,,,,,
+Ethiopia,AFR,2018,45142,3118,,21,48,69,2
+Fiji,WPR,2017,138,3,0,0,1,1,0
+Fiji,WPR,2018,135,9,0,0,0,0,0
+Finland,EUR,2017,139,4,4,4,1,5,1
+Finland,EUR,2018,139,2,3,4,0,4,1
+France,EUR,2017,1361,176,1133,,,79,10
+France,EUR,2018,1264,177,1162,,,76,10
+French Polynesia,WPR,2017,30,7,0,1,1,2,0
+French Polynesia,WPR,2018,32,7,0,1,0,1,0
+Gabon,AFR,2017,2068,431,0,0,0,,
+Gabon,AFR,2018,2243,285,0,,,88,3
+Gambia,AFR,2017,1312,117,0,0,4,0,0
+Gambia,AFR,2018,,,,0,1,0,0
+Georgia,EUR,2017,1466,595,0,129,133,246,44
+Georgia,EUR,2018,1349,513,0,93,74,159,34
+Germany,EUR,2017,77,156,3115,6,17,17,0
+Germany,EUR,2018,2356,207,886,55,23,58,8
+Ghana,AFR,2017,7924,862,2,12,37,0,0
+Ghana,AFR,2018,7929,850,19,18,50,1,1
+Greece,EUR,2017,280,38,18,6,1,7,2
+Greece,EUR,2018,233,19,25,4,0,4,0
+Greenland,EUR,2017,36,15,,,,,
+Greenland,EUR,2018,29,5,0,,,,
+Grenada,AMR,2017,2,1,0,0,0,0,0
+Grenada,AMR,2018,1,0,0,0,0,0,0
+Guam,WPR,2017,57,1,0,2,1,1,0
+Guam,WPR,2018,44,4,0,0,0,0,0
+Guatemala,AMR,2017,2610,150,0,6,13,8,1
+Guatemala,AMR,2018,2511,209,0,9,13,2,2
+Guinea,AFR,2017,7375,546,2,0,0,0,0
+Guinea,AFR,2018,7974,542,0,126,126,250,2
+Guinea-Bissau,AFR,2017,1750,35,0,0,0,0,0
+Guinea-Bissau,AFR,2018,1591,40,0,0,0,,
+Guyana,AMR,2017,300,76,0,0,0,0,0
+Guyana,AMR,2018,337,86,0,0,0,0,0
+Haiti,AMR,2017,9981,971,,,,,
+Haiti,AMR,2018,8743,1065,0,,,,
+Honduras,AMR,2017,2003,202,0,2,6,4,0
+Honduras,AMR,2018,2114,232,0,1,3,4,0
+Hungary,EUR,2017,318,36,0,7,4,10,4
+Hungary,EUR,2018,327,47,0,8,4,11,3
+Iceland,EUR,2017,7,1,0,0,0,,
+Iceland,EUR,2018,3,0,0,0,0,,
+India,SEA,2017,868769,176450,0,2152,5357,6787,466
+India,SEA,2018,825939,208197,0,3232,5182,6832,493
+Indonesia,SEA,2017,200946,15970,2467,140,1356,1321,50
+Indonesia,SEA,2018,213578,17681,19930,376,1543,1812,80
+Iran (Islamic Republic of),EMR,2017,4456,516,0,6,24,12,2
+Iran (Islamic Republic of),EMR,2018,4598,479,0,12,9,11,0
+Iraq,EMR,2017,2426,301,0,5,95,75,5
+Iraq,EMR,2018,2043,244,0,11,37,45,0
+Ireland,EUR,2017,103,7,62,2,0,2,0
+Ireland,EUR,2018,108,10,69,3,0,3,0
+Israel,EUR,2017,129,2,0,7,1,8,1
+Israel,EUR,2018,154,6,0,13,0,13,7
+Italy,EUR,2017,1644,71,516,45,11,45,5
+Italy,EUR,2018,1682,85,453,32,10,37,4
+Jamaica,AMR,2017,69,1,0,0,0,0,0
+Jamaica,AMR,2018,45,1,1,0,0,0,0
+Japan,WPR,2017,10524,551,152,43,9,,
+Japan,WPR,2018,9770,484,132,44,11,,
+Jordan,EMR,2017,173,8,0,0,0,,
+Jordan,EMR,2018,128,10,0,1,0,1,0
+Kazakhstan,EUR,2017,6881,3101,0,710,953,,
+Kazakhstan,EUR,2018,6719,4055,0,435,1027,,
+Kenya,AFR,2017,44365,3506,0,110,81,,
+Kenya,AFR,2018,44072,4131,18,29,42,71,0
+Kiribati,WPR,2017,182,9,0,0,0,0,0
+Kiribati,WPR,2018,158,4,0,0,0,0,0
+Kuwait,EMR,2017,373,0,0,4,0,4,0
+Kuwait,EMR,2018,333,0,0,2,0,2,0
+Kyrgyzstan,EUR,2017,2632,1217,0,392,435,353,127
+Kyrgyzstan,EUR,2018,2550,1325,0,523,718,926,119
+Lao People's Democratic Republic,WPR,2017,3763,134,0,,,,
+Lao People's Democratic Republic,WPR,2018,3849,142,0,9,10,19,2
+Latvia,EUR,2017,390,62,0,28,17,45,17
+Latvia,EUR,2018,,,,,,,
+Lebanon,EMR,2017,318,5,3,5,1,5,2
+Lebanon,EMR,2018,323,12,0,3,1,4,1
+Lesotho,AFR,2017,3128,602,0,,,,
+Lesotho,AFR,2018,3595,728,0,51,5,5,0
+Liberia,AFR,2017,3232,150,0,,,,
+Liberia,AFR,2018,3084,33,27,,,,
+Libya,EMR,2017,,,,,,,
+Libya,EMR,2018,,,,,,,
+Lithuania,EUR,2017,855,268,0,110,138,248,87
+Lithuania,EUR,2018,751,218,0,88,82,170,58
+Luxembourg,EUR,2017,0,0,21,0,0,,
+Luxembourg,EUR,2018,0,0,29,0,0,,
+Madagascar,AFR,2017,20312,1874,0,,24,17,0
+Madagascar,AFR,2018,21502,1824,0,0,14,9,0
+Malawi,AFR,2017,6360,790,4,1,1,,
+Malawi,AFR,2018,5760,804,1,,,,
+Malaysia,WPR,2017,14912,1480,0,26,81,65,1
+Malaysia,WPR,2018,14748,831,0,68,4,62,1
+Maldives,SEA,2017,97,1,0,1,,0,0
+Maldives,SEA,2018,105,0,0,2,0,0,0
+Mali,AFR,2017,4200,437,0,0,5,2,0
+Mali,AFR,2018,4463,431,0,,,,
+Malta,EUR,2017,25,0,0,0,0,,
+Malta,EUR,2018,27,0,2,0,0,,
+Marshall Islands,WPR,2017,67,4,0,0,0,0,0
+Marshall Islands,WPR,2018,65,3,0,1,0,0,0
+Mauritania,AFR,2017,1292,102,0,0,0,0,0
+Mauritania,AFR,2018,1187,51,0,1,3,4,0
+Mauritius,AFR,2017,105,5,,1,0,1,0
+Mauritius,AFR,2018,118,5,,1,0,1,0
+Mexico,AMR,2017,14055,1327,0,12,115,107,2
+Mexico,AMR,2018,14486,1691,0,20,84,41,0
+Micronesia (Federated States of),WPR,2017,32,0,0,0,0,0,0
+Micronesia (Federated States of),WPR,2018,28,0,0,0,0,0,0
+Monaco,EUR,2017,,,,,,,
+Monaco,EUR,2018,,,,,,,
+Mongolia,WPR,2017,1599,418,0,5,8,6,2
+Mongolia,WPR,2018,1542,382,0,38,32,16,1
+Montenegro,EUR,2017,49,9,0,0,1,1,1
+Montenegro,EUR,2018,61,3,0,0,1,1,0
+Montserrat,AMR,2017,,,,,,,
+Montserrat,AMR,2018,0,0,0,,,0,0
+Morocco,EMR,2017,12510,1683,0,4,192,168,16
+Morocco,EMR,2018,12681,1775,9,73,79,51,4
+Mozambique,AFR,2017,29292,2727,34,84,210,177,18
+Mozambique,AFR,2018,31385,2392,41,91,336,367,32
+Myanmar,SEA,2017,42489,7118,2,33,25,58,23
+Myanmar,SEA,2018,48832,7781,136,65,100,165,27
+Namibia,AFR,2017,4807,1278,3,135,98,64,14
+Namibia,AFR,2018,4324,1180,0,96,63,124,19
+Nauru,WPR,2017,6,0,0,0,0,0,0
+Nauru,WPR,2018,5,0,0,0,0,0,0
+Nepal,SEA,2017,14748,85,39,22,55,77,13
+Nepal,SEA,2018,15734,2668,36,9,20,29,3
+Netherlands,EUR,2017,357,16,0,5,1,5,0
+Netherlands,EUR,2018,375,20,2,3,0,3,1
+New Caledonia,WPR,2017,25,,,1,,,
+New Caledonia,WPR,2018,23,1,0,0,0,,
+New Zealand,WPR,2017,167,4,0,,,,
+New Zealand,WPR,2018,163,7,0,,,,
+Nicaragua,AMR,2017,1591,158,0,0,0,0,0
+Nicaragua,AMR,2018,1482,167,0,0,0,0,0
+Niger,AFR,2017,7961,528,,4,54,,
+Niger,AFR,2018,8230,464,,1,40,5,0
+Nigeria,AFR,2017,73556,3882,104,,,57,14
+Nigeria,AFR,2018,73942,4308,138,353,,,
+Niue,WPR,2017,1,0,0,0,0,,
+Niue,WPR,2018,0,0,0,0,0,0,0
+North Macedonia,EUR,2017,136,19,0,0,1,0,0
+North Macedonia,EUR,2018,135,11,0,2,0,0,0
+Northern Mariana Islands,WPR,2017,24,0,0,0,0,0,0
+Northern Mariana Islands,WPR,2018,15,0,0,1,0,1,0
+Norway,EUR,2017,134,9,3,6,0,6,0
+Norway,EUR,2018,104,12,0,4,0,4,0
+Oman,EMR,2017,189,4,0,0,0,0,0
+Oman,EMR,2018,174,2,0,4,0,0,0
+Pakistan,EMR,2017,128806,15241,116,535,2102,2600,123
+Pakistan,EMR,2018,128001,15925,195,1004,1483,2461,86
+Palau,WPR,2017,19,0,0,0,0,0,0
+Palau,WPR,2018,12,0,0,0,0,0,0
+Panama,AMR,2017,946,89,0,7,5,12,0
+Panama,AMR,2018,983,114,,8,4,12,1
+Papua New Guinea,WPR,2017,3784,362,0,0,0,,
+Papua New Guinea,WPR,2018,4387,543,18,,,250,8
+Paraguay,AMR,2017,1641,337,0,0,1,1,0
+Paraguay,AMR,2018,1592,331,0,1,4,2,0
+Peru,AMR,2017,17868,2889,0,844,491,849,82
+Peru,AMR,2018,17387,3075,0,1198,481,758,91
+Philippines,WPR,2017,105165,20919,0,37,350,259,4
+Philippines,WPR,2018,116941,20973,,32,274,130,2
+Poland,EUR,2017,3661,474,0,30,14,35,5
+Poland,EUR,2018,3559,498,0,31,15,41,12
+Portugal,EUR,2017,1057,87,0,9,1,7,0
+Portugal,EUR,2018,1291,68,107,6,1,1,0
+Puerto Rico,AMR,2017,30,1,0,0,0,0,0
+Puerto Rico,AMR,2018,17,2,0,0,0,0,0
+Qatar,EMR,2017,335,0,0,5,0,5,0
+Qatar,EMR,2018,335,1,2,3,0,3,0
+Republic of Korea,WPR,2017,16685,5020,354,320,246,560,42
+Republic of Korea,WPR,2018,16342,3807,370,321,202,523,23
+Republic of Moldova,EUR,2017,1494,773,0,308,178,475,30
+Republic of Moldova,EUR,2018,1446,751,0,309,316,616,74
+Romania,EUR,2017,7060,2264,0,97,259,142,43
+Romania,EUR,2018,6682,2052,0,117,230,223,46
+Russian Federation,EUR,2017,32978,26058,0,8206,14611,20477,3562
+Russian Federation,EUR,2018,31732,25455,,8880,15155,23997,4970
+Rwanda,AFR,2017,3837,452,0,22,14,34,0
+Rwanda,AFR,2018,3860,467,0,21,7,28,0
+Saint Kitts and Nevis,AMR,2017,1,0,,,,,
+Saint Kitts and Nevis,AMR,2018,0,0,0,0,0,0,0
+Saint Lucia,AMR,2017,11,0,0,0,0,0,0
+Saint Lucia,AMR,2018,5,0,0,0,0,0,0
+Saint Vincent and the Grenadines,AMR,2017,0,0,0,0,0,0,0
+Saint Vincent and the Grenadines,AMR,2018,,,,0,0,0,0
+Samoa,WPR,2017,13,0,0,0,,0,0
+Samoa,WPR,2018,7,0,0,,,,
+San Marino,EUR,2017,0,0,0,0,0,0,0
+San Marino,EUR,2018,0,0,0,0,0,0,0
+Sao Tome and Principe,AFR,2017,46,3,0,,,,
+Sao Tome and Principe,AFR,2018,51,2,0,1,0,0,0
+Saudi Arabia,EMR,2017,1707,139,16,9,7,0,0
+Saudi Arabia,EMR,2018,2012,116,17,10,2,0,0
+Senegal,AFR,2017,9418,1001,0,9,33,40,0
+Senegal,AFR,2018,9744,885,0,1,7,8,0
+Serbia,EUR,2017,464,47,2,1,4,,
+Serbia,EUR,2018,489,68,0,2,1,0,0
+Seychelles,AFR,2017,14,0,0,0,0,0,0
+Seychelles,AFR,2018,15,0,0,0,0,0,0
+Sierra Leone,AFR,2017,9324,557,,,,,
+Sierra Leone,AFR,2018,10124,158,1,,,120,0
+Singapore,WPR,2017,1152,86,0,12,2,14,0
+Singapore,WPR,2018,1143,88,0,11,1,11,0
+Sint Maarten (Dutch part),AMR,2017,,,,,,,
+Sint Maarten (Dutch part),AMR,2018,3,3,,0,0,0,0
+Slovakia,EUR,2017,119,30,1,4,1,5,2
+Slovakia,EUR,2018,144,17,4,0,2,2,0
+Slovenia,EUR,2017,85,4,0,1,0,1,0
+Slovenia,EUR,2018,70,8,2,0,0,,
+Solomon Islands,WPR,2017,121,5,0,0,0,0,0
+Solomon Islands,WPR,2018,176,6,0,0,0,0,0
+Somalia,EMR,2017,7448,385,0,205,62,142,0
+Somalia,EMR,2018,7370,113,0,63,37,100,3
+South Africa,AFR,2017,113126,16455,2879,2311,837,,
+South Africa,AFR,2018,126958,19247,2882,6056,,4579,461
+South Sudan,AFR,2017,3859,437,37,0,0,0,0
+South Sudan,AFR,2018,6582,679,55,,,,
+Spain,EUR,2017,2294,132,441,15,4,18,1
+Spain,EUR,2018,1761,92,1001,,,,
+Sri Lanka,SEA,2017,4019,362,7,5,9,12,0
+Sri Lanka,SEA,2018,4181,464,4,4,4,,
+Sudan,EMR,2017,6759,1201,75,3,37,,
+Sudan,EMR,2018,6765,884,46,,,,
+Suriname,AMR,2017,87,10,0,,,0,0
+Suriname,AMR,2018,105,9,0,0,0,0,0
+Sweden,EUR,2017,259,23,13,8,1,9,0
+Sweden,EUR,2018,282,13,3,5,2,7,0
+Switzerland,EUR,2017,294,16,54,6,2,,
+Switzerland,EUR,2018,282,25,35,3,1,4,1
+Syrian Arab Republic,EMR,2017,,77,,9,6,0,0
+Syrian Arab Republic,EMR,2018,979,72,0,6,10,0,0
+Tajikistan,EUR,2017,2432,652,0,413,133,508,279
+Tajikistan,EUR,2018,2487,550,0,296,120,312,52
+Thailand,SEA,2017,34195,3242,174,377,232,272,7
+Thailand,SEA,2018,39347,3916,523,768,307,630,29
+Timor-Leste,SEA,2017,1861,114,0,4,,,
+Timor-Leste,SEA,2018,1655,134,0,12,,,
+Togo,AFR,2017,2013,218,0,13,13,0,0
+Togo,AFR,2018,1893,214,0,15,9,0,0
+Tokelau,WPR,2017,0,2,0,,,,
+Tokelau,WPR,2018,,,,,,,
+Tonga,WPR,2017,7,0,0,0,0,0,0
+Tonga,WPR,2018,7,0,0,0,0,0,0
+Trinidad and Tobago,AMR,2017,116,17,0,0,1,0,0
+Trinidad and Tobago,AMR,2018,156,23,0,,,,
+Tunisia,EMR,2017,909,70,0,10,9,19,1
+Tunisia,EMR,2018,1015,36,0,11,8,19,1
+Turkey,EUR,2017,5681,657,0,121,61,100,2
+Turkey,EUR,2018,5465,530,0,123,44,120,8
+Turkmenistan,EUR,2017,605,316,,,,,
+Turkmenistan,EUR,2018,606,248,,,,,
+Turks and Caicos Islands,AMR,2017,,,,,,,
+Turks and Caicos Islands,AMR,2018,1,0,0,0,0,,
+Tuvalu,WPR,2017,10,0,1,0,0,0,0
+Tuvalu,WPR,2018,14,5,0,0,0,0,0
+Uganda,AFR,2017,25494,2599,26,30,65,75,3
+Uganda,AFR,2018,26963,3283,145,41,45,86,3
+Ukraine,EUR,2017,12840,7212,0,2594,2414,5008,1001
+Ukraine,EUR,2018,12931,6774,0,2755,2299,5054,972
+United Arab Emirates,EMR,2017,46,4,0,0,0,0,0
+United Arab Emirates,EMR,2018,50,1,0,0,1,0,0
+United Kingdom of Great Britain and Northern Ireland,EUR,2017,2133,136,112,24,4,27,3
+United Kingdom of Great Britain and Northern Ireland,EUR,2018,2047,163,103,17,7,19,3
+United Republic of Tanzania,AFR,2017,26364,2625,,15,24,39,0
+United Republic of Tanzania,AFR,2018,27201,1373,0,65,44,,
+United States of America,AMR,2017,5803,288,45,90,21,85,1
+United States of America,AMR,2018,5732,298,84,68,16,69,1
+Uruguay,AMR,2017,564,49,0,1,0,1,0
+Uruguay,AMR,2018,581,96,0,1,0,1,0
+Uzbekistan,EUR,2017,4592,3600,0,351,189,540,0
+Uzbekistan,EUR,2018,4828,2013,,392,424,816,0
+Vanuatu,WPR,2017,47,0,0,0,0,0,0
+Vanuatu,WPR,2018,41,0,0,0,0,0,0
+Venezuela (Bolivarian Republic of),AMR,2017,6815,679,0,8,23,31,2
+Venezuela (Bolivarian Republic of),AMR,2018,6974,551,0,3,9,12,0
+Viet Nam,WPR,2017,50673,8148,53,0,333,322,13
+Viet Nam,WPR,2018,49664,7193,56,0,305,265,13
+Wallis and Futuna Islands,WPR,2017,,,,,,,
+Wallis and Futuna Islands,WPR,2018,,,,,,,
+West Bank and Gaza Strip,EMR,2017,,,,,,,
+West Bank and Gaza Strip,EMR,2018,18,0,0,0,0,0,0
+Yemen,EMR,2017,3235,252,,0,0,,
+Yemen,EMR,2018,2849,275,0,2,6,0,0
+Zambia,AFR,2017,14022,2421,,11,112,0,0
+Zambia,AFR,2018,15373,1745,0,9,111,120,1
+Zimbabwe,AFR,2017,12355,1036,54,,,,
+Zimbabwe,AFR,2018,11398,728,102,117,,117,6
