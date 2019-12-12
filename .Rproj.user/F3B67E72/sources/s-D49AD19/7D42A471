@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576187037365.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3776328692",
+    "id" : "7D42A471",
+    "lastKnownWriteTime" : 1576187062,
+    "last_content_update" : 1576187062628,
+    "path" : "~/Desktop/SDS348Site/content/post/2019-12-12-new-post.Rmd",
+    "project_path" : "content/post/2019-12-12-new-post.Rmd",
+    "properties" : {
+        "cursorPosition" : "7,42",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
