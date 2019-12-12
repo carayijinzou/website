@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576190094216.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "567101445",
+    "id" : "31F2D4BD",
+    "lastKnownWriteTime" : 1576190098,
+    "last_content_update" : 1576190098702,
+    "path" : "~/Desktop/SDS348Site/content/Project2.Rmd",
+    "project_path" : "content/Project2.Rmd",
+    "properties" : {
+        "cursorPosition" : "32,53",
+        "scrollLine" : "20"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

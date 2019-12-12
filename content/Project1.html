@@ -1,0 +1,569 @@
+---
+title: 'Project 1: Exploratory Data Analysis'
+author: "SDS348 Fall 2019"
+date: "October 20, 2019 "
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+
+<div id="data-wrangling-and-data-exploration" class="section level2">
+<h2>Data Wrangling and Data Exploration</h2>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>The first two datasets are both from <a href="https://www.who.int/tb/country/data/download/en/">World Health Organization</a>. They contains information about cases of Tuberculosis for different countries including the new cases, previous cases, drug resistant cases, total population, etc. The third dataset is from <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD">The World Bank Group</a> which lists the GDP per capita of countries for different years in US dollars. This data is interesting because I am currently in a reserach stream at UT trying to identify potential drugs to treat tuberculosis. The first two datasets include information about the resistance of <em>Mycobacterium tuberculosis</em> to drugs. Tuberculosis is linked with poverty which is why the GDP per capita was also considered. Expectations include that as the number of TB (tuberculosis) cases increase, the number of drug resistant multidrug resistant (MDR) and extensively drug resistant (XDR) TB cases will also increase. Furthermore, as GDP per capita increases, TB cases (and mortality) per 100,000 individuals should decrease since it is assumed that there is more access to healthcare and resources for treatment and prevention.</p>
+</div>
+<div id="find-data" class="section level3">
+<h3>Find data:</h3>
+<pre class="r"><code>library(tidyverse)
+data1a &lt;- read.csv(&quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Lab.csv&quot;, 
+    header = T)
+data1b &lt;- read.csv(&quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_pop.csv&quot;, 
+    header = T)
+data2 &lt;- read.csv(&quot;/Users/yijinzou/Desktop/SDS348Site/content/GDP per capita.csv&quot;, 
+    header = T)</code></pre>
+</div>
+<div id="tidying" class="section level3">
+<h3>Tidying:</h3>
+<pre class="r"><code>join1 &lt;- left_join(data1a, data1b, by = c(&quot;country&quot;, &quot;year&quot;))
+head(join1)</code></pre>
+<pre><code>##       country region year new.pul.TB prev.treated.pul.TB prev.unk.pul.TB
+## 1 Afghanistan    EMR 2017      19354                2233             125
+## 2 Afghanistan    EMR 2018      20485                1712              NA
+## 3     Albania    EUR 2017        195                  15               0
+## 4     Albania    EUR 2018        198                  10               0
+## 5     Algeria    AFR 2017       6278                 419               0
+## 6     Algeria    AFR 2018       6137                 362              21
+##   new.MDR prev.MDR MDR.tested XDR pop.number TB.100k TB.num TB_mort.100k
+## 1      NA       NA         NA   5   36296113     189  69000        30.00
+## 2      NA       10         10   8   37171921     189  70000        29.00
+## 3       0        0          0   0    2884169      20    580         0.34
+## 4       1        1         NA  NA    2882740      18    510         0.34
+## 5      11       28         39   4   41389189      70  29000         7.70
+## 6       2        5          7   4   42228408      69  29000         7.70
+##   TB_mort.num
+## 1       11000
+## 2       11000
+## 3          10
+## 4          10
+## 5        3200
+## 6        3300</code></pre>
+<p>First, a left join was used to join the first two tuberculosis data sets since dataset 1a included information for 2017 and 2018 while dataset 1b contains data for many years (2000-2018). A left join was used compared to a full_join or right_join because there would be many rows with NAs (rows with year 2000-2016).</p>
+<pre class="r"><code>data2pivot &lt;- data2 %&gt;% pivot_longer(cols = c(3:4), names_to = &quot;year&quot;, 
+    values_to = &quot;GDP&quot;) %&gt;% separate(col = &quot;year&quot;, into = c(NA, 
+    &quot;year&quot;), sep = 1) %&gt;% mutate(year = as.numeric(year))
+head(data2pivot)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   country     Country.Code  year    GDP
+##   &lt;fct&gt;       &lt;fct&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Aruba       ABW           2017 25630.
+## 2 Aruba       ABW           2018    NA 
+## 3 Afghanistan AFG           2017   556.
+## 4 Afghanistan AFG           2018   521.
+## 5 Angola      AGO           2017  4096.
+## 6 Angola      AGO           2018  3432.</code></pre>
+<p>Then, to make it easier to join the first two datasets with the third dataset, pivot longer was used on the GDP data (dataset 2). This is due to the fact that while year is a column name in dataset 1a and 1b, for dataset 2, the GDP has two columns: 2017 and 2018. Additionally, when imported, the header of the GDP data inserted an X before the year value. This was removed using the seperate function. Mutate was then used on ‘year’ because its type was character which is incompatible with year in the tuberculosis (1a and 1b) dataset which is a numeric type (cannot be used to join).</p>
+</div>
+<div id="joiningmerging" class="section level3">
+<h3>Joining/Merging</h3>
+<pre class="r"><code>nrow(join1)</code></pre>
+<pre><code>## [1] 432</code></pre>
+<pre class="r"><code>nrow(data2pivot)</code></pre>
+<pre><code>## [1] 528</code></pre>
+<pre class="r"><code># Joining of all three datasets and deleting rows with NAs
+join2 &lt;- inner_join(join1, data2pivot, by = c(&quot;country&quot;, &quot;year&quot;))</code></pre>
+<pre><code>## Warning: Column `country` joining factors with different levels, coercing
+## to character vector</code></pre>
+<pre class="r"><code>nrow(join1) - nrow(join2)</code></pre>
+<pre><code>## [1] 72</code></pre>
+<pre class="r"><code>nrow(data2pivot) - nrow(join2)</code></pre>
+<pre><code>## [1] 168</code></pre>
+<pre class="r"><code>join2 &lt;- join2 %&gt;% na.omit()
+nrow(join2)</code></pre>
+<pre><code>## [1] 222</code></pre>
+<pre class="r"><code># document the type of join that you do
+# (left/right/inner/full), including how many cases in each
+# dataset were dropped and why you chose this particular join</code></pre>
+<p>Initially, the tuberculosis dataset had 432 cases while the GDP dataset had 528 cases. An inner join was chosen so that all countries remaining would contain information for tuberculosis and their GDP. This resulted in 360 observations remaining with 72 cases being dropped from the tuberculosis dataset and 168 cases dropped from the GDP dataset. Problems include that rows with NAs are more likely to be smaller and poorer countries with less documentation of the data which may skew the results.</p>
+<p>###Wrangling: filter, select, arrange, group_by, mutate, summarize
+#(mean, sd, var, n, quantile, min, max, n_distinct, cor, etc) of numeric variables overall and after grouping by one of your categorical variables (either together or one-at-a-time; if you have two categorical variables, try to include at least one statistic based on a grouping of two categorical variables simultaneously). If you do not have any categorical variables, create one using mutate to satisfy the requirements above. Ideally, you will find a way to show these summary statistics in an easy-to-read table (e.g., by reshaping). If you have lots of numeric variables, or your categorical variables have too many categories, just pick a few (either numeric variables or categories of a categorical variable) and summarize based on those. It would be a good idea to show a correlation matrix for your numeric variables!</p>
+<pre class="r"><code># Determining the quantile of GDP and population for each
+# country
+ntile &lt;- join2 %&gt;% mutate(ntileGDP = ntile(n = 5, x = GDP)) %&gt;% 
+    mutate(ntilepop = ntile(n = 5, x = pop.number))
+
+# Mean and standard deviation of numeric variables (excluding
+# year)
+join2 %&gt;% select_if(is.numeric) %&gt;% select(-year) %&gt;% summarize_all(.funs = mean)</code></pre>
+<pre><code>##   new.pul.TB prev.treated.pul.TB prev.unk.pul.TB  new.MDR prev.MDR
+## 1   16571.29            2829.351        138.8468 135.6441 197.5495
+##   MDR.tested      XDR pop.number TB.100k   TB.num TB_mort.100k TB_mort.num
+## 1   290.7928 38.74324   33335846 98.5732 56241.17     16.46901    8344.464
+##        GDP
+## 1 14741.78</code></pre>
+<pre class="r"><code>join2 %&gt;% select_if(is.numeric) %&gt;% select(-year) %&gt;% summarize_all(.funs = sd)</code></pre>
+<pre><code>##   new.pul.TB prev.treated.pul.TB prev.unk.pul.TB  new.MDR prev.MDR
+## 1    84215.1            18464.84        1363.483 667.0942   1133.7
+##   MDR.tested      XDR pop.number TB.100k   TB.num TB_mort.100k TB_mort.num
+## 1   1601.977 261.0853  131603854 135.356 276737.8      32.3854    44225.92
+##        GDP
+## 1 18664.98</code></pre>
+<pre class="r"><code>join2 %&gt;% summarize_all(.funs = n_distinct)</code></pre>
+<pre><code>##   country region year new.pul.TB prev.treated.pul.TB prev.unk.pul.TB
+## 1     130      6    2        205                 148              44
+##   new.MDR prev.MDR MDR.tested XDR pop.number TB.100k TB.num TB_mort.100k
+## 1      77       77         86  43        222     152    142          139
+##   TB_mort.num Country.Code GDP
+## 1         132          130 222</code></pre>
+<pre class="r"><code># top 10 Observations for extensively drug resistant TB cases
+# for 2017 and 2018
+ntile %&gt;% arrange(desc(XDR)) %&gt;% head(10)</code></pre>
+<pre><code>##               country region year new.pul.TB prev.treated.pul.TB
+## 1  Russian Federation    EUR 2017      32978               26058
+## 2             Ukraine    EUR 2017      12840                7212
+## 3             Ukraine    EUR 2018      12931                6774
+## 4               India    SEA 2018     825939              208197
+## 5               India    SEA 2017     868769              176450
+## 6             Belarus    EUR 2017       1690                 700
+## 7          Tajikistan    EUR 2017       2432                 652
+## 8             Belarus    EUR 2018       1529                 612
+## 9            Pakistan    EMR 2017     128806               15241
+## 10               Peru    AMR 2018      17387                3075
+##    prev.unk.pul.TB new.MDR prev.MDR MDR.tested  XDR pop.number TB.100k
+## 1                0    8206    14611      20477 3562  145530082      59
+## 2                0    2594     2414       5008 1001   44487709      84
+## 3                0    2755     2299       5054  972   44246156      80
+## 4                0    3232     5182       6832  493 1352642280     199
+## 5                0    2152     5357       6787  466 1338676785     204
+## 6                0     629      459       1088  343    9450231      37
+## 7                0     413      133        508  279    8880268      85
+## 8                0     559      425        984  185    9452617      31
+## 9              116     535     2102       2600  123  207906209     267
+## 10               0    1198      481        758   91   31989260     123
+##     TB.num TB_mort.100k TB_mort.num Country.Code        GDP ntileGDP
+## 1    85000          8.1       12000          RUS 10750.5871        4
+## 2    37000         14.0        6400          UKR  2640.6757        2
+## 3    36000         13.0        5700          UKR  3095.1736        2
+## 4  2690000         33.0      449000          IND  2015.5905        2
+## 5  2740000         34.0      454000          IND  1981.4990        2
+## 6     3500          6.0         560          BLR  5761.7471        3
+## 7     7500          9.2         820          TJK   806.0416        1
+## 8     2900          5.9         560          BLR  6289.9386        3
+## 9   554000         21.0       45000          PAK  1466.8431        1
+## 10   39000          8.3        2700          PER  6947.2566        3
+##    ntilepop
+## 1         5
+## 2         5
+## 3         5
+## 4         5
+## 5         5
+## 6         3
+## 7         3
+## 8         3
+## 9         5
+## 10        5</code></pre>
+<pre class="r"><code># new variable created using mutate; proportion of XDR/MDR:
+# richest countries as well as the poorest countries have the
+# lowest mean percentage of MDR TB cases developing into XDR
+# cases
+ntile %&gt;% mutate(perc.XDR.MDR = XDR/MDR.tested) %&gt;% group_by(ntileGDP) %&gt;% 
+    summarize(mean(perc.XDR.MDR, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   ntileGDP `mean(perc.XDR.MDR, na.rm = T)`
+##      &lt;int&gt;                           &lt;dbl&gt;
+## 1        1                          0.0709
+## 2        2                          0.169 
+## 3        3                          0.150 
+## 4        4                          0.129 
+## 5        5                          0.0803</code></pre>
+<pre class="r"><code># Group by quantile of GDP per capita ; mean TB per 100,000
+# people and mortality due to TB per 100,00 people appears to
+# decrease as the percentile of GDP per capita increases
+ntile %&gt;% group_by(ntileGDP) %&gt;% summarize(mean(TB.100k), mean(TB_mort.100k))</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##   ntileGDP `mean(TB.100k)` `mean(TB_mort.100k)`
+##      &lt;int&gt;           &lt;dbl&gt;                &lt;dbl&gt;
+## 1        1           220                 49.0  
+## 2        2           163                 19.4  
+## 3        3            64.0                9.93 
+## 4        4            29.0                2.61 
+## 5        5            14.9                0.811</code></pre>
+<pre class="r"><code># Group by region in world: AFR=Africa; AMR=Americas;
+# EMR=Eastern Mediterranean; EUR=Europe; SEAR=South-East
+# Asia; WPR=Western Pacific
+join2 %&gt;% group_by(region) %&gt;% select_if(is.numeric) %&gt;% select(-year) %&gt;% 
+    summarize(mean(TB.100k), mean(TB_mort.100k))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   region `mean(TB.100k)` `mean(TB_mort.100k)`
+##   &lt;fct&gt;            &lt;dbl&gt;                &lt;dbl&gt;
+## 1 AFR              210                  53.0 
+## 2 AMR               30.7                 3.79
+## 3 EMR               76.6                10.2 
+## 4 EUR               22.8                 2.09
+## 5 SEA              198.                 26.4 
+## 6 WPR              153.                 11.5</code></pre>
+<pre class="r"><code># Maximum TB cases per 100,000 people
+ntile %&gt;% filter(TB.100k == max(TB.100k))</code></pre>
+<pre><code>##   country region year new.pul.TB prev.treated.pul.TB prev.unk.pul.TB
+## 1 Lesotho    AFR 2018       3595                 728               0
+##   new.MDR prev.MDR MDR.tested XDR pop.number TB.100k TB.num TB_mort.100k
+## 1      51        5          5   0    2108328     611  13000          200
+##   TB_mort.num Country.Code      GDP ntileGDP ntilepop
+## 1        4200          LSO 1324.283        1        2</code></pre>
+<pre class="r"><code># Minimum TB cases per 100,000 people
+ntile %&gt;% filter(TB.100k == min(TB.100k))</code></pre>
+<pre><code>##      country region year new.pul.TB prev.treated.pul.TB prev.unk.pul.TB
+## 1   Barbados    AMR 2017          0                   0               0
+## 2 San Marino    EUR 2017          0                   0               0
+##   new.MDR prev.MDR MDR.tested XDR pop.number TB.100k TB.num TB_mort.100k
+## 1       0        0          0   0     286232       0      0          0.9
+## 2       0        0          0   0      33671       0      0          0.0
+##   TB_mort.num Country.Code      GDP ntileGDP ntilepop
+## 1           3          BRB 16327.61        4        1
+## 2           0          SMR 48494.55        5        1</code></pre>
+<pre class="r"><code># Group by two variables: percentile of population and year
+ntile %&gt;% group_by(ntilepop, year) %&gt;% summarize(mean(TB.100k), 
+    mean(TB_mort.100k))</code></pre>
+<pre><code>## # A tibble: 10 x 4
+## # Groups:   ntilepop [5]
+##    ntilepop  year `mean(TB.100k)` `mean(TB_mort.100k)`
+##       &lt;int&gt; &lt;dbl&gt;           &lt;dbl&gt;                &lt;dbl&gt;
+##  1        1  2017            89.1                 9.21
+##  2        1  2018            91.8                10.4 
+##  3        2  2017           117.                 24.1 
+##  4        2  2018           154.                 31.6 
+##  5        3  2017            23.3                 2.31
+##  6        3  2018            20.9                 1.93
+##  7        4  2017           106.                 22.6 
+##  8        4  2018           147.                 33.8 
+##  9        5  2017           124.                 15.1 
+## 10        5  2018           124.                 16.4</code></pre>
+<p>Since most of the variables are numeric, the quantiles of GDP and the population were found and were used later to group the data. The mean and standard deviation were found for the numeric variables using the summarize_all function. Using arrange, the country that has the most extensively drug resistant TB cases for either 2017 or 2018 is the Russia followed by Ukraine and India. Using mutate to create a new variable, the proportion of of XDR/MDR appears to decrease towards the extremes of GDP per capita. Grouping by quantile of GDP per capita, mean TB cases and mortality due to TB per 100,00 people appears to decrease as the quantile of GDP per capita increases. Grouping by region, AFR has the highest mean TB cases and mortality per 100,000 people of the regions while EUR has the lowest averages.</p>
+<p>The country with the maximum TB per 100,000 people is Lesotho in AFR and in the 1st quantile of GDP (low). The countries with the minimum TB per 100,000 people are Barbados and San Marino which both have small populations (1st quantile) and relatively high GDP. Grouping by two variables (population and year), countries in the 2nd and 4th quantile of population saw the greatest change in mean TB cases per 100,000 with both reporting an increase from 2017 to 2018. Countries in the 2nd and 4th quantile of the population also had the greatest mean mortality due to TB cases per 100,000 (as well as the greatest change between 2017 and 2018). Interestingly, the countries in the 3rd quantile had the lowest mean TB cases and mortality per 100,000 (for both 2017 and 2018).</p>
+<pre class="r"><code># Correlation matrix
+join2 %&gt;% select_if(is.numeric) %&gt;% cor() %&gt;% round(2)</code></pre>
+<pre><code>##                      year new.pul.TB prev.treated.pul.TB prev.unk.pul.TB
+## year                 1.00       0.00                0.01            0.06
+## new.pul.TB           0.00       1.00                0.97            0.17
+## prev.treated.pul.TB  0.01       0.97                1.00            0.06
+## prev.unk.pul.TB      0.06       0.17                0.06            1.00
+## new.MDR             -0.03       0.39                0.47            0.02
+## prev.MDR            -0.06       0.47                0.53            0.08
+## MDR.tested          -0.05       0.43                0.49            0.07
+## XDR                 -0.06       0.18                0.26            0.01
+## pop.number           0.00       0.99                0.98            0.14
+## TB.100k              0.04       0.19                0.13            0.11
+## TB.num               0.00       0.99                0.96            0.21
+## TB_mort.100k         0.05       0.11                0.08            0.04
+## TB_mort.num          0.01       0.99                0.97            0.15
+## GDP                  0.01      -0.13               -0.10           -0.02
+##                     new.MDR prev.MDR MDR.tested   XDR pop.number TB.100k
+## year                  -0.03    -0.06      -0.05 -0.06       0.00    0.04
+## new.pul.TB             0.39     0.47       0.43  0.18       0.99    0.19
+## prev.treated.pul.TB    0.47     0.53       0.49  0.26       0.98    0.13
+## prev.unk.pul.TB        0.02     0.08       0.07  0.01       0.14    0.11
+## new.MDR                1.00     0.96       0.98  0.96       0.43    0.04
+## prev.MDR               0.96     1.00       0.99  0.93       0.51    0.06
+## MDR.tested             0.98     0.99       1.00  0.96       0.47    0.05
+## XDR                    0.96     0.93       0.96  1.00       0.23    0.00
+## pop.number             0.43     0.51       0.47  0.23       1.00    0.13
+## TB.100k                0.04     0.06       0.05  0.00       0.13    1.00
+## TB.num                 0.38     0.47       0.42  0.17       0.98    0.23
+## TB_mort.100k           0.01     0.03       0.02 -0.01       0.07    0.86
+## TB_mort.num            0.38     0.46       0.42  0.17       0.98    0.21
+## GDP                   -0.09    -0.08      -0.09 -0.06      -0.10   -0.40
+##                     TB.num TB_mort.100k TB_mort.num   GDP
+## year                  0.00         0.05        0.01  0.01
+## new.pul.TB            0.99         0.11        0.99 -0.13
+## prev.treated.pul.TB   0.96         0.08        0.97 -0.10
+## prev.unk.pul.TB       0.21         0.04        0.15 -0.02
+## new.MDR               0.38         0.01        0.38 -0.09
+## prev.MDR              0.47         0.03        0.46 -0.08
+## MDR.tested            0.42         0.02        0.42 -0.09
+## XDR                   0.17        -0.01        0.17 -0.06
+## pop.number            0.98         0.07        0.98 -0.10
+## TB.100k               0.23         0.86        0.21 -0.40
+## TB.num                1.00         0.13        0.98 -0.13
+## TB_mort.100k          0.13         1.00        0.16 -0.32
+## TB_mort.num           0.98         0.16        1.00 -0.13
+## GDP                  -0.13        -0.32       -0.13  1.00</code></pre>
+<p>The correlation matrix shows that the strongest positive correlations are between new pulmonary TB cases and population number; new pulmonary TB cases and total number of TB cases; new pulmonary TB cases and total mortality due to TB; previous MDR TB cases and number of MDR cases that were tested for additional resistance. The strongest negative correlations are GDP and the TB cases per 100,000 people; GDP and TB mortality per 100,000 people.</p>
+<p>###Visualizing</p>
+<pre class="r"><code># GGPlot 1: Scatterplot
+ntile %&gt;% ggplot(aes(x = TB.100k, y = TB_mort.100k)) + geom_point(aes(color = ntileGDP)) + 
+    ggtitle(&quot;TB Cases and Mortality&quot;) + xlab(&quot;TB Cases per 100,000 people&quot;) + 
+    ylab(&quot;TB mortality per 100,000 people&quot;) + scale_fill_brewer() + 
+    scale_y_continuous(breaks = c(25, 50, 75, 100, 125, 150, 
+        175, 200)) + scale_x_continuous(breaks = c(100, 200, 
+    300, 400, 500, 600)) + labs(color = &quot;GDP&quot;) + theme_classic()</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" />
+This graph shows that as TB cases increase, TB mortality also increases per 100,000 people. Contrastingly, TB cases and mortality have a negative relationship with GDP per capita. This suggests that countries with lower GDP have higher occurrences of TB and mortality due to TB which is expected since there is less funding towards preventative measures as well as resources and access to treatment.</p>
+<pre class="r"><code># GGPlot 2: Boxplot
+ntile %&gt;% ggplot(aes(group = region, x = region, y = TB.100k)) + 
+    geom_boxplot() + geom_jitter(alpha = 0.3, aes(color = ntilepop, 
+    size = ntilepop)) + ggtitle(&quot;TB cases for each Region&quot;) + 
+    xlab(&quot;Region&quot;) + ylab(&quot;TB Cases per 100,000 people&quot;) + labs(color = &quot;Population&quot;, 
+    size = &quot;Population&quot;) + theme_light()</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" />
+The boxplot shows that the median of TB cases for 100,000 people is highest in SEA. Previously, summary statistics showed that AFR had the highest mean. From the boxplot, it is clear that the distribution is skewed resulting in a higher median than mean. The spread is largest for AFR as well. The countries in AMR, EMR, and EUR all have relatively low median values. When grouped by region, there is not an obvious relationship between the population and TB cases per 100,000 people.</p>
+<pre class="r"><code># GGPlot 3: Stacked Bar plot
+ntile$year &lt;- factor(ntile$year, levels = c(&quot;2017&quot;, &quot;2018&quot;))
+ggplot(ntile, aes(x = ntileGDP, y = TB_mort.100k, fill = year)) + 
+    geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;, position = &quot;dodge&quot;) + 
+    geom_errorbar(stat = &quot;summary&quot;, position = &quot;dodge&quot;) + xlab(&quot;Quantile of GDP per capita&quot;) + 
+    ylab(&quot;TB Mortality per 100,000 people&quot;) + ggtitle(&quot;GDP per Capita and TB mortality per 100,000 people&quot;) + 
+    theme_grey() + scale_y_continuous(breaks = c(10, 20, 30, 
+    40, 50, 60))</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" />
+A stacked bar plot was used to demonstrate how increasing GDP per capita results in a lower TB mortality on average. The biggest change in TB mortality between 2017 and 2018 is represented in the countries in the 1st quantile of GDP per capita (however, the error bars are overlapping). As the quantile of GDP increases, the spread of the data (error bars) also decrease.</p>
+<p>###Dimensionality Reduction (- Do clustering or PCA (on at least your numerics), visualize (i.e., in addition to your other plots), and interpret if possible (don’t stress too much about this either)!)</p>
+<pre class="r"><code># Prepare data by scaling
+joinPCA &lt;- join2 %&gt;% select_if(is.numeric) %&gt;% scale %&gt;% na.omit
+join_pca &lt;- princomp(joinPCA)
+summary(join_pca, loadings = T)</code></pre>
+<pre><code>## Importance of components:
+##                           Comp.1    Comp.2    Comp.3     Comp.4     Comp.5
+## Standard deviation     2.5078967 1.6468586 1.4044384 1.01775753 0.96840866
+## Proportion of Variance 0.4512861 0.1946011 0.1415266 0.07432267 0.06728992
+## Cumulative Proportion  0.4512861 0.6458872 0.7874138 0.86173646 0.92902637
+##                            Comp.6      Comp.7      Comp.8      Comp.9
+## Standard deviation     0.86661846 0.371251458 0.202421301 0.145441708
+## Proportion of Variance 0.05388756 0.009889379 0.002939985 0.001517786
+## Cumulative Proportion  0.98291394 0.992803315 0.995743300 0.997261086
+##                            Comp.10      Comp.11      Comp.12     Comp.13
+## Standard deviation     0.127383707 0.1098210941 0.0756806126 0.052799805
+## Proportion of Variance 0.001164288 0.0008653747 0.0004109623 0.000200031
+## Cumulative Proportion  0.998425374 0.9992907485 0.9997017107 0.999901742
+##                             Comp.14
+## Standard deviation     3.700566e-02
+## Proportion of Variance 9.825826e-05
+## Cumulative Proportion  1.000000e+00
+## 
+## Loadings:
+##                     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7
+## year                                      0.729  0.674              
+## new.pul.TB          -0.356  0.246 -0.118                            
+## prev.treated.pul.TB -0.362  0.188 -0.138                            
+## prev.unk.pul.TB                           0.656 -0.728  0.101       
+## new.MDR             -0.297 -0.385                                   
+## prev.MDR            -0.320 -0.344                                   
+## MDR.tested          -0.310 -0.372                                   
+## XDR                 -0.235 -0.474  0.124                            
+## pop.number          -0.361  0.210 -0.147                            
+## TB.100k                     0.213  0.602               -0.241  0.708
+## TB.num              -0.354  0.253 -0.100                       0.131
+## TB_mort.100k                0.192  0.602               -0.358 -0.670
+## TB_mort.num         -0.354  0.255 -0.101                      -0.115
+## GDP                               -0.404  0.157        -0.890       
+##                     Comp.8 Comp.9 Comp.10 Comp.11 Comp.12 Comp.13 Comp.14
+## year                                                                     
+## new.pul.TB           0.147 -0.304  0.175                  -0.790  -0.156 
+## prev.treated.pul.TB -0.465  0.688         -0.130   0.264  -0.111         
+## prev.unk.pul.TB                                                          
+## new.MDR             -0.616 -0.402 -0.197  -0.295  -0.212           0.203 
+## prev.MDR             0.524  0.382 -0.267  -0.185  -0.219  -0.151   0.416 
+## MDR.tested           0.177                -0.102           0.177  -0.821 
+## XDR                                0.537   0.512   0.332           0.201 
+## pop.number                 -0.139 -0.605   0.616           0.164         
+## TB.100k                                                                  
+## TB.num               0.239 -0.307  0.115  -0.437   0.509   0.358   0.199 
+## TB_mort.100k                                                             
+## TB_mort.num                        0.424          -0.667   0.390         
+## GDP</code></pre>
+<pre class="r"><code># Choose number of PC to keep convert standard deviations to
+# eigenvalues
+eigval &lt;- join_pca$sdev^2
+# proportion of variance explained by each PC
+varprop = round(eigval/sum(eigval), 2)
+ggplot() + geom_bar(aes(y = varprop, x = 1:14), stat = &quot;identity&quot;) + 
+    xlab(&quot;&quot;) + geom_path(aes(y = varprop, x = 1:14)) + geom_text(aes(x = 1:14, 
+    y = varprop, label = round(varprop, 2)), vjust = 1, col = &quot;white&quot;, 
+    size = 5) + scale_y_continuous(breaks = seq(0, 0.6, 0.2), 
+    labels = scales::percent) + scale_x_continuous(breaks = 1:14)</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Plot for PCA (PC1 and PC2)
+join2 %&gt;% na.omit %&gt;% mutate(PC1 = join_pca$scores[, 1], PC2 = join_pca$scores[, 
+    2]) %&gt;% ggplot(aes(x = PC1, y = PC2, color = region, size = GDP)) + 
+    geom_point() + ggtitle(&quot;PCA Plot&quot;) + theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-11-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Plot for PCA (PC3 and PC4)
+join2 %&gt;% na.omit %&gt;% mutate(PC3 = join_pca$scores[, 3], PC4 = join_pca$scores[, 
+    4]) %&gt;% ggplot(aes(x = PC3, y = PC4, color = region, size = GDP)) + 
+    geom_point() + ggtitle(&quot;PCA Plot&quot;) + theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-11-3.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Plot of loadings
+join_pca$loadings[1:14, 1:2] %&gt;% as.data.frame %&gt;% rownames_to_column %&gt;% 
+    ggplot() + geom_hline(aes(yintercept = 0), lty = 2) + geom_vline(aes(xintercept = 0), 
+    lty = 2) + ylab(&quot;PC2&quot;) + xlab(&quot;PC1&quot;) + geom_segment(aes(x = 0, 
+    y = 0, xend = Comp.1, yend = Comp.2), arrow = arrow(), col = &quot;red&quot;) + 
+    geom_label(aes(x = Comp.1 * 1.1, y = Comp.2 * 1.1, label = rowname)) + 
+    ggtitle(&quot;Plot of Loadings&quot;)</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-11-4.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># biplot combining loadings plot and PC score plot
+library(&quot;factoextra&quot;)
+fviz_pca_biplot(join_pca)</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-11-5.png" width="768" style="display: block; margin: auto;" /></p>
+<pre><code>Based on the scree plot and cumulative proportion of variance (and Kaiser&#39;s rule), 3 to 4 PCs should be chosen. High scores on PC1 indicate low TB cases (new, previous, MDR TB, mortality, etc.) and low population. For PC2, high scores indicate high TB cases and mortality per 100,000 people but lower resistant (MDR and XDR) TB cases as well as lower GDP per capita. For PC3, high scores indicate lower cases of resistant TB cases and lower TB cases and mortality per 100,000 people but higher GDP. On the PCA plot, there appears to be some seperation based on GDP looking at PC3 (larger dots on the right). Finally, high scores PC4 indicate high numbers of confirmed TB cases with unknown TB treatment history.
+
+The plot of loadings helps visualize which variances contribute to which of the PCs with a smaller angle between vectors showing higher correlation. Therefore, GDP is negatively correlated to the other variables and mainly differs based on PC1. Contrastingly, other variables such as new cases of pulmonary TB, previous treated pulmonary TB cases, total TB cases, etc. are almost redundant. 
+</code></pre>
+</div>
+</div>
+<div id="r-version-3.6.1-2019-07-05" class="section level2">
+<h2>R version 3.6.1 (2019-07-05)</h2>
+</div>
+<div id="platform-x86_64-apple-darwin15.6.0-64-bit" class="section level2">
+<h2>Platform: x86_64-apple-darwin15.6.0 (64-bit)</h2>
+</div>
+<div id="running-under-macos-mojave-10.14.6" class="section level2">
+<h2>Running under: macOS Mojave 10.14.6</h2>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+</div>
+<div id="matrix-products-default" class="section level2">
+<h2>Matrix products: default</h2>
+</div>
+<div id="blas-libraryframeworksr.frameworkversions3.6resourcesliblibrblas.0.dylib" class="section level2">
+<h2>BLAS: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib</h2>
+</div>
+<div id="lapack-libraryframeworksr.frameworkversions3.6resourcesliblibrlapack.dylib" class="section level2">
+<h2>LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib</h2>
+</div>
+<div id="section-1" class="section level2">
+<h2></h2>
+</div>
+<div id="locale" class="section level2">
+<h2>locale:</h2>
+</div>
+<div id="en_us.utf-8en_us.utf-8en_us.utf-8cen_us.utf-8en_us.utf-8" class="section level2">
+<h2>[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</h2>
+</div>
+<div id="section-2" class="section level2">
+<h2></h2>
+</div>
+<div id="attached-base-packages" class="section level2">
+<h2>attached base packages:</h2>
+</div>
+<div id="stats-graphics-grdevices-utils-datasets-methods-base" class="section level2">
+<h2>[1] stats graphics grDevices utils datasets methods base</h2>
+</div>
+<div id="section-3" class="section level2">
+<h2></h2>
+</div>
+<div id="other-attached-packages" class="section level2">
+<h2>other attached packages:</h2>
+</div>
+<div id="factoextra_1.0.5-forcats_0.4.0-stringr_1.4.0-dplyr_0.8.3" class="section level2">
+<h2>[1] factoextra_1.0.5 forcats_0.4.0 stringr_1.4.0 dplyr_0.8.3</h2>
+</div>
+<div id="purrr_0.3.2-readr_1.3.1-tidyr_1.0.0-tibble_2.1.3" class="section level2">
+<h2>[5] purrr_0.3.2 readr_1.3.1 tidyr_1.0.0 tibble_2.1.3</h2>
+</div>
+<div id="ggplot2_3.2.1-tidyverse_1.2.1-knitr_1.25" class="section level2">
+<h2>[9] ggplot2_3.2.1 tidyverse_1.2.1 knitr_1.25</h2>
+</div>
+<div id="section-4" class="section level2">
+<h2></h2>
+</div>
+<div id="loaded-via-a-namespace-and-not-attached" class="section level2">
+<h2>loaded via a namespace (and not attached):</h2>
+</div>
+<div id="tidyselect_0.2.5-xfun_0.10-haven_2.1.1-lattice_0.20-38" class="section level2">
+<h2>[1] tidyselect_0.2.5 xfun_0.10 haven_2.1.1 lattice_0.20-38</h2>
+</div>
+<div id="colorspace_1.4-1-vctrs_0.2.0-generics_0.0.2-htmltools_0.4.0" class="section level2">
+<h2>[5] colorspace_1.4-1 vctrs_0.2.0 generics_0.0.2 htmltools_0.4.0</h2>
+</div>
+<div id="yaml_2.2.0-utf8_1.1.4-rlang_0.4.0-ggpubr_0.2.3" class="section level2">
+<h2>[9] yaml_2.2.0 utf8_1.1.4 rlang_0.4.0 ggpubr_0.2.3</h2>
+</div>
+<div id="pillar_1.4.2-glue_1.3.1-withr_2.1.2-modelr_0.1.5" class="section level2">
+<h2>[13] pillar_1.4.2 glue_1.3.1 withr_2.1.2 modelr_0.1.5</h2>
+</div>
+<div id="readxl_1.3.1-lifecycle_0.1.0-ggsignif_0.6.0-munsell_0.5.0" class="section level2">
+<h2>[17] readxl_1.3.1 lifecycle_0.1.0 ggsignif_0.6.0 munsell_0.5.0</h2>
+</div>
+<div id="blogdown_0.17-gtable_0.3.0-cellranger_1.1.0-rvest_0.3.4" class="section level2">
+<h2>[21] blogdown_0.17 gtable_0.3.0 cellranger_1.1.0 rvest_0.3.4</h2>
+</div>
+<div id="evaluate_0.14-labeling_0.3-fansi_0.4.0-broom_0.5.2" class="section level2">
+<h2>[25] evaluate_0.14 labeling_0.3 fansi_0.4.0 broom_0.5.2</h2>
+</div>
+<div id="rcpp_1.0.2-scales_1.0.0-backports_1.1.5-formatr_1.7" class="section level2">
+<h2>[29] Rcpp_1.0.2 scales_1.0.0 backports_1.1.5 formatR_1.7</h2>
+</div>
+<div id="jsonlite_1.6-hms_0.5.1-digest_0.6.21-stringi_1.4.3" class="section level2">
+<h2>[33] jsonlite_1.6 hms_0.5.1 digest_0.6.21 stringi_1.4.3</h2>
+</div>
+<div id="ggrepel_0.8.1-bookdown_0.16-grid_3.6.1-cli_1.1.0" class="section level2">
+<h2>[37] ggrepel_0.8.1 bookdown_0.16 grid_3.6.1 cli_1.1.0</h2>
+</div>
+<div id="tools_3.6.1-magrittr_1.5-lazyeval_0.2.2-crayon_1.3.4" class="section level2">
+<h2>[41] tools_3.6.1 magrittr_1.5 lazyeval_0.2.2 crayon_1.3.4</h2>
+</div>
+<div id="pkgconfig_2.0.3-zeallot_0.1.0-ellipsis_0.3.0-xml2_1.2.2" class="section level2">
+<h2>[45] pkgconfig_2.0.3 zeallot_0.1.0 ellipsis_0.3.0 xml2_1.2.2</h2>
+</div>
+<div id="lubridate_1.7.4-assertthat_0.2.1-rmarkdown_1.16-httr_1.4.1" class="section level2">
+<h2>[49] lubridate_1.7.4 assertthat_0.2.1 rmarkdown_1.16 httr_1.4.1</h2>
+</div>
+<div id="rstudioapi_0.10-r6_2.4.0-nlme_3.1-140-compiler_3.6.1" class="section level2">
+<h2>[53] rstudioapi_0.10 R6_2.4.0 nlme_3.1-140 compiler_3.6.1</h2>
+<pre><code></code></pre>
+</div>
+<div id="cst" class="section level2">
+<h2>[1] “2019-12-12 16:35:08 CST”</h2>
+<pre><code></code></pre>
+</div>
+<div id="sysname" class="section level2">
+<h2>sysname</h2>
+</div>
+<div id="darwin" class="section level2">
+<h2>“Darwin”</h2>
+</div>
+<div id="release" class="section level2">
+<h2>release</h2>
+</div>
+<div id="section-5" class="section level2">
+<h2>“18.7.0”</h2>
+</div>
+<div id="version" class="section level2">
+<h2>version</h2>
+</div>
+<div id="darwin-kernel-version-18.7.0-thu-jun-20-184221-pdt-2019-rootxnu-4903.270.474release_x86_64" class="section level2">
+<h2>“Darwin Kernel Version 18.7.0: Thu Jun 20 18:42:21 PDT 2019; root:xnu-4903.270.47~4/RELEASE_X86_64”</h2>
+</div>
+<div id="nodename" class="section level2">
+<h2>nodename</h2>
+</div>
+<div id="cara-yijin-zou.local" class="section level2">
+<h2>“Cara-Yijin-Zou.local”</h2>
+</div>
+<div id="machine" class="section level2">
+<h2>machine</h2>
+</div>
+<div id="x86_64" class="section level2">
+<h2>“x86_64”</h2>
+</div>
+<div id="login" class="section level2">
+<h2>login</h2>
+</div>
+<div id="yijinzou" class="section level2">
+<h2>“yijinzou”</h2>
+</div>
+<div id="user" class="section level2">
+<h2>user</h2>
+</div>
+<div id="yijinzou-1" class="section level2">
+<h2>“yijinzou”</h2>
+</div>
+<div id="effective_user" class="section level2">
+<h2>effective_user</h2>
+</div>
+<div id="yijinzou-2" class="section level2">
+<h2>“yijinzou”</h2>
+<p>```</p>
+</div>
