@@ -1,0 +1,178 @@
+---
+title: 'Project 1: Exploratory Data Analysis'
+author: "SDS348 Fall 2019"
+date: "October 20, 2019 "
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r global_options, include=FALSE}
+library(knitr)
+options(tinytex.verbose = TRUE)
+opts_chunk$set(fig.align="center", fig.height=5, message=FALSE, fig.width=8,tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+## Data Wrangling and Data Exploration
+
+### Introduction
+The first two datasets are both from [World Health Organization](https://www.who.int/tb/country/data/download/en/). They contains information about cases of Tuberculosis for different countries including the new cases, previous cases, drug resistant cases, total population, etc. The third dataset is from [The World Bank Group](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD) which lists the GDP per capita of countries for different years in US dollars. This data is interesting because I am currently in a reserach stream at UT trying to identify potential drugs to treat tuberculosis. The first two datasets include information about the resistance of *Mycobacterium tuberculosis* to drugs. Tuberculosis is linked with poverty which is why the GDP per capita was also considered. Expectations include that as the number of TB (tuberculosis) cases increase, the number of drug resistant multidrug resistant (MDR) and extensively drug resistant (XDR) TB cases will also increase. Furthermore, as GDP per capita increases, TB cases (and mortality) per 100,000 individuals should decrease  since it is assumed that there is more access to healthcare and resources for treatment and prevention. 
+
+
+### Find data:
+
+```{R}
+library(tidyverse)
+data1a<-read.csv("/content/TB_Lab.csv", header=T)
+data1b<-read.csv("/content/TB_pop.csv", header=T)
+data2<-read.csv("/content/GDP per capita.csv", header=T)
+
+```
+### Tidying:
+
+```{R}
+join1<-left_join(data1a, data1b, by=c("country","year"))
+head(join1)
+
+```
+First, a left join was used to join the first two tuberculosis data sets since dataset 1a included information for 2017 and 2018 while dataset 1b contains data for many years (2000-2018). A left join was used compared to a full_join or right_join because there would be many rows with NAs (rows with year 2000-2016). 
+
+```{R}
+data2pivot<-data2%>%pivot_longer(cols = c(3:4),names_to = "year", values_to = "GDP")%>%separate(col = "year",into = c(NA, "year"),sep=1)%>%mutate(year=as.numeric(year))
+head(data2pivot)
+```
+Then, to make it easier to join the first two datasets with the third dataset, pivot longer was used on the GDP data (dataset 2). This is due to the fact that while year is a column name in dataset 1a and 1b, for dataset 2, the GDP has two columns: 2017 and 2018. Additionally, when imported, the header of the GDP data inserted an X before the year value. This was removed using the seperate function. Mutate was then used on 'year' because its type was character which is incompatible with year in the tuberculosis (1a and 1b) dataset which is a numeric type (cannot be used to join). 
+
+### Joining/Merging
+```{R}
+nrow(join1)
+nrow(data2pivot)
+#Joining of all three datasets and deleting rows with NAs
+join2<-inner_join(join1, data2pivot, by=c("country","year"))
+nrow(join1)-nrow(join2)
+nrow(data2pivot)-nrow(join2)
+join2<-join2%>%na.omit()
+nrow(join2)
+
+#document the type of join that you do (left/right/inner/full), including how many cases in each dataset were dropped and why you chose this particular join
+```
+Initially, the tuberculosis dataset had 432 cases while the GDP dataset had 528 cases. An inner join was chosen so that all countries remaining would contain information for tuberculosis and their GDP. This resulted in 360 observations remaining with 72 cases being dropped from the tuberculosis dataset and 168 cases dropped from the GDP dataset. Problems include that rows with NAs are more likely to be smaller and poorer countries with less documentation of the data which may skew the results. 
+
+###Wrangling: filter, select, arrange, group_by, mutate, summarize
+#(mean, sd, var, n, quantile, min, max, n_distinct, cor, etc) of numeric variables overall and after grouping by one of your categorical variables (either together or one-at-a-time; if you have two categorical variables, try to include at least one statistic based on a grouping of two categorical variables simultaneously). If you do not have any categorical variables, create one using mutate to satisfy the requirements above. Ideally, you will find a way to show these summary statistics in an easy-to-read table (e.g., by reshaping). If you have lots of numeric variables, or your categorical variables have too many categories, just pick a few (either numeric variables or categories of a categorical variable) and summarize based on those. It would be a good idea to show a correlation matrix for your numeric variables!
+
+```{R}
+#Determining the quantile of GDP and population for each country 
+ntile<-join2%>%mutate(ntileGDP=ntile(n = 5,x = GDP))%>%mutate(ntilepop=ntile(n=5, x=pop.number))
+
+#Mean and standard deviation of numeric variables (excluding year)
+join2%>% select_if(is.numeric)%>%select(-year)%>%summarize_all(.funs = mean)
+join2%>% select_if(is.numeric)%>%select(-year)%>%summarize_all(.funs = sd)
+join2%>% summarize_all(.funs = n_distinct)
+
+
+#top 10 Observations for extensively drug resistant TB cases for 2017 and 2018 
+ntile%>%arrange(desc(XDR))%>%head(10)
+
+#new variable created using mutate; proportion of XDR/MDR: richest countries as well as the poorest countries have the lowest mean percentage of MDR TB cases developing into XDR cases
+ntile%>%mutate(perc.XDR.MDR=XDR/MDR.tested)%>%group_by(ntileGDP)%>%summarize(mean(perc.XDR.MDR, na.rm = T))
+
+#Group by quantile of GDP per capita ; mean TB per 100,000 people and mortality due to TB per 100,00 people appears to decrease as the percentile of GDP per capita increases 
+ntile%>%group_by(ntileGDP)%>%summarize(mean(TB.100k),mean(TB_mort.100k))
+
+#Group by region in world: AFR=Africa; AMR=Americas; EMR=Eastern Mediterranean; EUR=Europe; SEAR=South-East Asia; WPR=Western Pacific
+join2%>%group_by(region)%>%select_if(is.numeric)%>%select(-year)%>%summarize(mean(TB.100k),mean(TB_mort.100k))
+
+#Maximum TB cases per 100,000 people
+ntile%>%filter(TB.100k==max(TB.100k))
+#Minimum TB cases per 100,000 people
+ntile%>%filter(TB.100k==min(TB.100k))
+
+#Group by two variables: percentile of population and year
+ntile%>%group_by(ntilepop,year)%>%summarize(mean(TB.100k),mean(TB_mort.100k))
+```
+Since most of the variables are numeric, the quantiles of GDP and the population were found and were used later to group the data. The mean and standard deviation were found for the numeric variables using the summarize_all function. Using arrange, the country that has the most extensively drug resistant TB cases for either 2017 or 2018 is the Russia followed by Ukraine and India. Using mutate to create a new variable, the proportion of of XDR/MDR appears to decrease towards the extremes of GDP per capita. Grouping by quantile of GDP per capita, mean TB cases and mortality due to TB per 100,00 people appears to decrease as the quantile of GDP per capita increases. Grouping by region, AFR has the highest mean TB cases and mortality per 100,000 people of the regions while EUR has the lowest averages. 
+
+The country with the maximum TB per 100,000 people is Lesotho in AFR and in the 1st quantile of GDP (low). The countries with the minimum TB per 100,000 people are Barbados and San Marino which both have small populations (1st quantile) and relatively high GDP. Grouping by two variables (population and year), countries in the 2nd and 4th quantile of population saw the greatest change in mean TB cases per 100,000 with both reporting an increase from 2017 to 2018. Countries in the 2nd and 4th quantile of the population also had the greatest mean mortality due to TB cases per 100,000 (as well as the greatest change between 2017 and 2018). Interestingly, the countries in the 3rd quantile had the lowest mean TB cases and mortality per 100,000 (for both 2017 and 2018). 
+
+
+```{R}
+
+#Correlation matrix
+join2%>%select_if(is.numeric)%>%cor()%>%round(2)
+
+```
+The correlation matrix shows that the strongest positive correlations are between new pulmonary TB cases and population number; new pulmonary TB cases and total number of TB cases; new pulmonary TB cases and total mortality due to TB; previous MDR TB cases and number of MDR cases that were tested for additional resistance. The strongest negative correlations are GDP and the TB cases per 100,000 people; GDP and TB mortality per 100,000 people. 
+
+###Visualizing
+```{R}
+
+#GGPlot 1: Scatterplot
+ntile%>%ggplot(aes(x=TB.100k, y=TB_mort.100k))+geom_point(aes(color=ntileGDP))+ggtitle("TB Cases and Mortality")+ xlab("TB Cases per 100,000 people")+ ylab("TB mortality per 100,000 people")+scale_fill_brewer()+scale_y_continuous(breaks=c(25, 50, 75,100,125,150,175,200))+ scale_x_continuous(breaks=c(100,200,300,400,500,600))+labs(color = "GDP")+theme_classic()
+```
+This graph shows that as TB cases increase, TB mortality also increases per 100,000 people. Contrastingly, TB cases and mortality have a negative relationship with GDP per capita. This suggests that countries with lower GDP have higher occurrences of TB and mortality due to TB which is expected since there is less funding towards preventative measures as well as resources and access to treatment.   
+
+```{R}
+#GGPlot 2: Boxplot
+ntile%>%ggplot(aes(group=region,x=region, y=TB.100k)) + geom_boxplot()+ geom_jitter(alpha=.3, aes(color=ntilepop,size=ntilepop))+ggtitle("TB cases for each Region")+xlab("Region")+ylab("TB Cases per 100,000 people")+labs(color = "Population",size="Population")+theme_light()
+```
+The boxplot shows that the median of TB cases for 100,000 people is highest in SEA. Previously, summary statistics showed that AFR had the highest mean. From the boxplot, it is clear that the distribution is skewed resulting in a higher median than mean. The spread is largest for AFR as well. The countries in AMR, EMR, and EUR all have relatively low median values. When grouped by region, there is not an obvious relationship between the population and TB cases per 100,000 people. 
+
+```{R}
+#GGPlot 3: Stacked Bar plot 
+ntile$year<-factor(ntile$year,levels = c("2017","2018"))
+ggplot(ntile, aes(x = ntileGDP, y = TB_mort.100k, fill=year))+
+  geom_bar(stat="summary",fun.y="mean", position="dodge")+
+  geom_errorbar(stat="summary",position="dodge")+xlab("Quantile of GDP per capita")+ylab("TB Mortality per 100,000 people")+
+  ggtitle("GDP per Capita and TB mortality per 100,000 people")+theme_grey()+scale_y_continuous(breaks=c(10,20,30,40,50,60))
+```
+A stacked bar plot was used to demonstrate how increasing GDP per capita results in a lower TB mortality on average. The biggest change in TB mortality between 2017 and 2018 is represented in the countries in the 1st quantile of GDP per capita (however, the error bars are overlapping). As the quantile of GDP increases, the spread of the data (error bars) also decrease. 
+
+###Dimensionality Reduction (- Do clustering or PCA (on at least your numerics),  visualize (i.e., in addition to your other plots), and interpret if possible (don't stress too much about this either)!)
+```{R}
+#Prepare data by scaling 
+joinPCA<-join2%>%select_if(is.numeric)%>%scale%>%na.omit
+join_pca<-princomp(joinPCA)
+summary(join_pca, loadings=T)
+```
+
+
+```{R}
+#Choose number of PC to keep 
+#convert standard deviations to eigenvalues
+eigval<-join_pca$sdev^2 
+#proportion of variance explained by each PC
+varprop=round(eigval/sum(eigval),2) 
+ggplot()+geom_bar(aes(y=varprop,x=1:14),stat="identity")+xlab("")+geom_path(aes(y=varprop,x=1:14))+
+ geom_text(aes(x=1:14,y=varprop,label=round(varprop,2)),vjust=1,col="white",size=5)+
+ scale_y_continuous(breaks=seq(0,.6,.2),labels = scales::percent)+
+ scale_x_continuous(breaks=1:14)
+
+#Plot for PCA (PC1 and PC2)
+join2%>%na.omit%>%mutate(PC1=join_pca$scores[,1], PC2=join_pca$scores[,2])%>%
+  ggplot(aes(x=PC1,y=PC2, color=region, size=GDP))+geom_point()+ggtitle("PCA Plot")+theme(legend.position ="none")
+#Plot for PCA (PC3 and PC4)
+join2%>%na.omit%>%mutate(PC3=join_pca$scores[,3], PC4=join_pca$scores[,4])%>%
+  ggplot(aes(x=PC3,y=PC4, color=region, size=GDP))+geom_point()+ggtitle("PCA Plot")+theme(legend.position ="none")
+
+#Plot of loadings
+join_pca$loadings[1:14,1:2]%>%as.data.frame%>%rownames_to_column%>%
+ggplot()+geom_hline(aes(yintercept=0),lty=2)+
+  geom_vline(aes(xintercept=0),lty=2)+ylab("PC2")+xlab("PC1")+
+  geom_segment(aes(x=0,y=0,xend=Comp.1,yend=Comp.2),arrow=arrow(),col="red")+
+  geom_label(aes(x=Comp.1*1.1,y=Comp.2*1.1,label=rowname))+ggtitle("Plot of Loadings")
+
+#biplot combining loadings plot and PC score plot 
+library("factoextra")
+fviz_pca_biplot(join_pca)
+```
+
+```
+Based on the scree plot and cumulative proportion of variance (and Kaiser's rule), 3 to 4 PCs should be chosen. High scores on PC1 indicate low TB cases (new, previous, MDR TB, mortality, etc.) and low population. For PC2, high scores indicate high TB cases and mortality per 100,000 people but lower resistant (MDR and XDR) TB cases as well as lower GDP per capita. For PC3, high scores indicate lower cases of resistant TB cases and lower TB cases and mortality per 100,000 people but higher GDP. On the PCA plot, there appears to be some seperation based on GDP looking at PC3 (larger dots on the right). Finally, high scores PC4 indicate high numbers of confirmed TB cases with unknown TB treatment history.
+
+The plot of loadings helps visualize which variances contribute to which of the PCs with a smaller angle between vectors showing higher correlation. Therefore, GDP is negatively correlated to the other variables and mainly differs based on PC1. Contrastingly, other variables such as new cases of pulmonary TB, previous treated pulmonary TB cases, total TB cases, etc. are almost redundant. 
+```{R, echo=F}
+## DO NOT DELETE THIS BLOCK!
+sessionInfo()
+Sys.time()
+Sys.info()
+```

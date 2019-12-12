@@ -22,9 +22,9 @@ The first two datasets are both from [World Health Organization](https://www.who
 
 ```{R}
 library(tidyverse)
-data1a<-read.csv("TB_Lab.csv", header=T)
-data1b<-read.csv("TB_pop.csv", header=T)
-data2<-read.csv("GDP per capita.csv", header=T)
+data1a<-read.csv("/content/TB_Lab.csv", header=T)
+data1b<-read.csv("/content/TB_pop.csv", header=T)
+data2<-read.csv("/content/GDP per capita.csv", header=T)
 
 ```
 ### Tidying:

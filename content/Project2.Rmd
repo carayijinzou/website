@@ -30,7 +30,7 @@ options(tibble.width = 100,width = 100)
 
 ```{R}
 library(tidyverse)
-TB_Data<-read.csv("TB_Data.csv", header=T)%>%dplyr::select(-1, -Country.Code)
+TB_Data<-read.csv("/content/TB_Data.csv", header=T)%>%dplyr::select(-1, -Country.Code)
 
 ```
 #Introduction 
