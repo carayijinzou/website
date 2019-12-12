@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1576194303600.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2230106303",
+    "id" : "B3B6C9CD",
+    "lastKnownWriteTime" : 1576194378,
+    "last_content_update" : 1576194378938,
+    "path" : "~/Desktop/SDS348Site/content/resume/2019-12-12-resume-and-about-me.Rmd",
+    "project_path" : "content/resume/2019-12-12-resume-and-about-me.Rmd",
+    "properties" : {
+        "cursorPosition" : "9,17",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
