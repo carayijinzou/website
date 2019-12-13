@@ -141,6 +141,6 @@ main2()
 
 After scores are calculated, the optimum alignment sequence can be found: 
 
-![MtDala Alignment Sequence](/SeqAlignmentMtDala.png)
+![](/SeqAlignmentMtDala.png)
 
 
