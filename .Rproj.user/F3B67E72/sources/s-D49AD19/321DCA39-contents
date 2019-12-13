@@ -1,7 +1,0 @@
-{{ .Content }}
- {{ range $i, $el := .Site.Data.projects.source }}
-<h5>
-<i class="{{ .icon }}"></i>&nbsp;&nbsp;
-<strong><a href="#">Project {{ add $i 1 }}</a></strong>&nbsp;-&nbsp;{{ $el.description }}
-</h5>
-{{ end }}
