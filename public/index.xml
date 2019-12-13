@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/</guid>
+      <description>Here are some projects I have been working on: - Project 1 - Project 2 </description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>/blog/python/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
@@ -46,15 +55,6 @@
       
       <guid>/project1/</guid>
       <description>Data Wrangling and Data Exploration Introduction The first two datasets are both from World Health Organization. They contains information about cases of Tuberculosis for different countries including the new cases, previous cases, drug resistant cases, total population, etc. The third dataset is from The World Bank Group which lists the GDP per capita of countries for different years in US dollars. This data is interesting because I am currently in a reserach stream at UT trying to identify potential drugs to treat tuberculosis.</description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>/projects/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
-      
-      <guid>/projects/</guid>
-      <description>Projects Here are some projects I have been working on: - Project 1 - Project 2 </description>
     </item>
     
   </channel>
