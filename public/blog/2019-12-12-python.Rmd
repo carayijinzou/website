@@ -149,7 +149,7 @@ main2()
 
 ```
 
-After scores are calculated, the optimum alignment sequence can be found: 
+After scores are calculated, the optimum alignment sequence can be found. An example is shown below where many mismatches can be observed.  
 
 ![](/SeqAlignmentMtDala.png)
 
