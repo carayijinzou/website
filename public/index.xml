@@ -12,13 +12,13 @@
     
     
     <item>
-      <title>SDS348 Python</title>
-      <link>/blog/new-post/</link>
+      <title>Python</title>
+      <link>/blog/python/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/new-post/</guid>
-      <description> In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find 3-mers in a sequence and record the frequency number in a dictionary.
-# Find all 3-mers in these two sequences my_seq1 = &amp;quot;ATCATCATG&amp;quot; my_seq2 = &amp;quot;CAGCCCAATCAGGCTCTACTGCCACTAAACTTACGCAGGATATATTTACGCCGACGTACT&amp;quot; def findThreemers(seq): dict1={} a = 0 b= 3 three_mer= seq[a:b] while len(three_mer)==3: if three_mer in dict1: dict1[three_mer]+= 1 else: dict1[three_mer]= 1 a+=1 b+=1 three_mer= seq[a:b] print (dict1) def main(): print(&amp;quot;In the first sequence, the 3-mers are :&amp;quot;) findThreemers(my_seq1) print (&amp;quot; In the second sequence, the 3-mers are: &amp;quot;) findThreemers(my_seq2) main() ## In the first sequence, the 3-mers are : ## {&amp;#39;ATC&amp;#39;: 2, &amp;#39;TCA&amp;#39;: 2, &amp;#39;CAT&amp;#39;: 2, &amp;#39;ATG&amp;#39;: 1} ## In the second sequence, the 3-mers are: ## {&amp;#39;CAG&amp;#39;: 3, &amp;#39;AGC&amp;#39;: 1, &amp;#39;GCC&amp;#39;: 3, &amp;#39;CCC&amp;#39;: 1, &amp;#39;CCA&amp;#39;: 2, &amp;#39;CAA&amp;#39;: 1, &amp;#39;AAT&amp;#39;: 1, &amp;#39;ATC&amp;#39;: 1, &amp;#39;TCA&amp;#39;: 1, &amp;#39;AGG&amp;#39;: 2, &amp;#39;GGC&amp;#39;: 1, &amp;#39;GCT&amp;#39;: 1, &amp;#39;CTC&amp;#39;: 1, &amp;#39;TCT&amp;#39;: 1, &amp;#39;CTA&amp;#39;: 2, &amp;#39;TAC&amp;#39;: 4, &amp;#39;ACT&amp;#39;: 4, &amp;#39;CTG&amp;#39;: 1, &amp;#39;TGC&amp;#39;: 1, &amp;#39;CAC&amp;#39;: 1, &amp;#39;TAA&amp;#39;: 1, &amp;#39;AAA&amp;#39;: 1, &amp;#39;AAC&amp;#39;: 1, &amp;#39;CTT&amp;#39;: 1, &amp;#39;TTA&amp;#39;: 2, &amp;#39;ACG&amp;#39;: 3, &amp;#39;CGC&amp;#39;: 2, &amp;#39;GCA&amp;#39;: 1, &amp;#39;GGA&amp;#39;: 1, &amp;#39;GAT&amp;#39;: 1, &amp;#39;ATA&amp;#39;: 2, &amp;#39;TAT&amp;#39;: 2, &amp;#39;ATT&amp;#39;: 1, &amp;#39;TTT&amp;#39;: 1, &amp;#39;CCG&amp;#39;: 1, &amp;#39;CGA&amp;#39;: 1, &amp;#39;GAC&amp;#39;: 1, &amp;#39;CGT&amp;#39;: 1, &amp;#39;GTA&amp;#39;: 1} </description>
+      <guid>/blog/python/</guid>
+      <description>K-mers In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find k-mers in a sequence and record the frequency number in a dictionary.
+ my_seq1 = &amp;quot;CAGCCCAATC&amp;quot; def findkmers(k, seq): dict1={} a = 0 b= k k_mer= seq[a:b] while len(k_mer)==k: if k_mer in dict1: dict1[k_mer]+= 1 else: dict1[k_mer]= 1 a+=1 b+=1 k_mer= seq[a:b] print (dict1) def main(): print(&amp;quot;For the sequence: CAGCCCAATC&amp;quot;) for i in range (1,5): print(&amp;quot;The&amp;quot;, str(i)+&amp;quot;-mers are :&amp;quot;) findkmers(i, my_seq1) main() ## For the sequence: CAGCCCAATC ## The 1-mers are : ## {&amp;#39;C&amp;#39;: 5, &amp;#39;A&amp;#39;: 3, &amp;#39;G&amp;#39;: 1, &amp;#39;T&amp;#39;: 1} ## The 2-mers are : ## {&amp;#39;CA&amp;#39;: 2, &amp;#39;AG&amp;#39;: 1, &amp;#39;GC&amp;#39;: 1, &amp;#39;CC&amp;#39;: 2, &amp;#39;AA&amp;#39;: 1, &amp;#39;AT&amp;#39;: 1, &amp;#39;TC&amp;#39;: 1} ## The 3-mers are : ## {&amp;#39;CAG&amp;#39;: 1, &amp;#39;AGC&amp;#39;: 1, &amp;#39;GCC&amp;#39;: 1, &amp;#39;CCC&amp;#39;: 1, &amp;#39;CCA&amp;#39;: 1, &amp;#39;CAA&amp;#39;: 1, &amp;#39;AAT&amp;#39;: 1, &amp;#39;ATC&amp;#39;: 1} ## The 4-mers are : ## {&amp;#39;CAGC&amp;#39;: 1, &amp;#39;AGCC&amp;#39;: 1, &amp;#39;GCCC&amp;#39;: 1, &amp;#39;CCCA&amp;#39;: 1, &amp;#39;CCAA&amp;#39;: 1, &amp;#39;CAAT&amp;#39;: 1, &amp;#39;AATC&amp;#39;: 1}  Sequence Alignment Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences.</description>
     </item>
     
     <item>
@@ -54,8 +54,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/project2/</guid>
-      <description>##Cara (Yijin)Zou
-Modeling library(tidyverse) TB_Data&amp;lt;-read.csv(&amp;quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv&amp;quot;, header=T)%&amp;gt;%dplyr::select(-1, -Country.Code) #Introduction This dataset is comprised of a merged dataset from World Health Organization and The World Bank Group. It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars.</description>
+      <description>Cara (Yijin)Zou  Modeling library(tidyverse) TB_Data&amp;lt;-read.csv(&amp;quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv&amp;quot;, header=T)%&amp;gt;%dplyr::select(-1, -Country.Code)  Introduction This dataset is comprised of a merged dataset from World Health Organization and The World Bank Group. It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars.</description>
     </item>
     
   </channel>

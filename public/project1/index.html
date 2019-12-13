@@ -150,8 +150,9 @@ nrow(join2)</code></pre>
 # (left/right/inner/full), including how many cases in each
 # dataset were dropped and why you chose this particular join</code></pre>
 <p>Initially, the tuberculosis dataset had 432 cases while the GDP dataset had 528 cases. An inner join was chosen so that all countries remaining would contain information for tuberculosis and their GDP. This resulted in 360 observations remaining with 72 cases being dropped from the tuberculosis dataset and 168 cases dropped from the GDP dataset. Problems include that rows with NAs are more likely to be smaller and poorer countries with less documentation of the data which may skew the results.</p>
-<p>###Wrangling: filter, select, arrange, group_by, mutate, summarize
-#(mean, sd, var, n, quantile, min, max, n_distinct, cor, etc) of numeric variables overall and after grouping by one of your categorical variables (either together or one-at-a-time; if you have two categorical variables, try to include at least one statistic based on a grouping of two categorical variables simultaneously). If you do not have any categorical variables, create one using mutate to satisfy the requirements above. Ideally, you will find a way to show these summary statistics in an easy-to-read table (e.g., by reshaping). If you have lots of numeric variables, or your categorical variables have too many categories, just pick a few (either numeric variables or categories of a categorical variable) and summarize based on those. It would be a good idea to show a correlation matrix for your numeric variables!</p>
+</div>
+<div id="wrangling-filter-select-arrange-group_by-mutate-summarize" class="section level3">
+<h3>Wrangling: filter, select, arrange, group_by, mutate, summarize</h3>
 <pre class="r"><code># Determining the quantile of GDP and population for each
 # country
 ntile &lt;- join2 %&gt;% mutate(ntileGDP = ntile(n = 5, x = GDP)) %&gt;% 
@@ -353,7 +354,9 @@ join2 %&gt;% select_if(is.numeric) %&gt;% cor() %&gt;% round(2)</code></pre>
 ## TB_mort.num           0.98         0.16        1.00 -0.13
 ## GDP                  -0.13        -0.32       -0.13  1.00</code></pre>
 <p>The correlation matrix shows that the strongest positive correlations are between new pulmonary TB cases and population number; new pulmonary TB cases and total number of TB cases; new pulmonary TB cases and total mortality due to TB; previous MDR TB cases and number of MDR cases that were tested for additional resistance. The strongest negative correlations are GDP and the TB cases per 100,000 people; GDP and TB mortality per 100,000 people.</p>
-<p>###Visualizing</p>
+</div>
+<div id="visualizing" class="section level3">
+<h3>Visualizing</h3>
 <pre class="r"><code># GGPlot 1: Scatterplot
 ntile %&gt;% ggplot(aes(x = TB.100k, y = TB_mort.100k)) + geom_point(aes(color = ntileGDP)) + 
     ggtitle(&quot;TB Cases and Mortality&quot;) + xlab(&quot;TB Cases per 100,000 people&quot;) + 
@@ -381,7 +384,9 @@ ggplot(ntile, aes(x = ntileGDP, y = TB_mort.100k, fill = year)) +
     40, 50, 60))</code></pre>
 <p><img src="/Project1_files/figure-html/unnamed-chunk-9-1.png" width="768" style="display: block; margin: auto;" />
 A stacked bar plot was used to demonstrate how increasing GDP per capita results in a lower TB mortality on average. The biggest change in TB mortality between 2017 and 2018 is represented in the countries in the 1st quantile of GDP per capita (however, the error bars are overlapping). As the quantile of GDP increases, the spread of the data (error bars) also decrease.</p>
-<p>###Dimensionality Reduction (- Do clustering or PCA (on at least your numerics), visualize (i.e., in addition to your other plots), and interpret if possible (don’t stress too much about this either)!)</p>
+</div>
+<div id="dimensionality-reduction---do-clustering-or-pca-on-at-least-your-numerics-visualize-i.e.-in-addition-to-your-other-plots-and-interpret-if-possible-dont-stress-too-much-about-this-either" class="section level3">
+<h3>Dimensionality Reduction (- Do clustering or PCA (on at least your numerics), visualize (i.e., in addition to your other plots), and interpret if possible (don’t stress too much about this either)!)</h3>
 <pre class="r"><code># Prepare data by scaling
 joinPCA &lt;- join2 %&gt;% select_if(is.numeric) %&gt;% scale %&gt;% na.omit
 join_pca &lt;- princomp(joinPCA)
@@ -468,167 +473,60 @@ join_pca$loadings[1:14, 1:2] %&gt;% as.data.frame %&gt;% rownames_to_column %&gt
 library(&quot;factoextra&quot;)
 fviz_pca_biplot(join_pca)</code></pre>
 <p><img src="/Project1_files/figure-html/unnamed-chunk-11-5.png" width="768" style="display: block; margin: auto;" /></p>
-<pre><code>Based on the scree plot and cumulative proportion of variance (and Kaiser&#39;s rule), 3 to 4 PCs should be chosen. High scores on PC1 indicate low TB cases (new, previous, MDR TB, mortality, etc.) and low population. For PC2, high scores indicate high TB cases and mortality per 100,000 people but lower resistant (MDR and XDR) TB cases as well as lower GDP per capita. For PC3, high scores indicate lower cases of resistant TB cases and lower TB cases and mortality per 100,000 people but higher GDP. On the PCA plot, there appears to be some seperation based on GDP looking at PC3 (larger dots on the right). Finally, high scores PC4 indicate high numbers of confirmed TB cases with unknown TB treatment history.
-
-The plot of loadings helps visualize which variances contribute to which of the PCs with a smaller angle between vectors showing higher correlation. Therefore, GDP is negatively correlated to the other variables and mainly differs based on PC1. Contrastingly, other variables such as new cases of pulmonary TB, previous treated pulmonary TB cases, total TB cases, etc. are almost redundant. 
-</code></pre>
+<p>Based on the scree plot and cumulative proportion of variance (and Kaiser’s rule), 3 to 4 PCs should be chosen. High scores on PC1 indicate low TB cases (new, previous, MDR TB, mortality, etc.) and low population. For PC2, high scores indicate high TB cases and mortality per 100,000 people but lower resistant (MDR and XDR) TB cases as well as lower GDP per capita. For PC3, high scores indicate lower cases of resistant TB cases and lower TB cases and mortality per 100,000 people but higher GDP. On the PCA plot, there appears to be some seperation based on GDP looking at PC3 (larger dots on the right). Finally, high scores PC4 indicate high numbers of confirmed TB cases with unknown TB treatment history.</p>
+<p>The plot of loadings helps visualize which variances contribute to which of the PCs with a smaller angle between vectors showing higher correlation. Therefore, GDP is negatively correlated to the other variables and mainly differs based on PC1. Contrastingly, other variables such as new cases of pulmonary TB, previous treated pulmonary TB cases, total TB cases, etc. are almost redundant.</p>
+<pre><code>## R version 3.6.1 (2019-07-05)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Mojave 10.14.6
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] factoextra_1.0.5 forcats_0.4.0    stringr_1.4.0    dplyr_0.8.3     
+##  [5] purrr_0.3.2      readr_1.3.1      tidyr_1.0.0      tibble_2.1.3    
+##  [9] ggplot2_3.2.1    tidyverse_1.2.1  knitr_1.25      
+## 
+## loaded via a namespace (and not attached):
+##  [1] tidyselect_0.2.5 xfun_0.10        haven_2.1.1      lattice_0.20-38 
+##  [5] colorspace_1.4-1 vctrs_0.2.0      generics_0.0.2   htmltools_0.4.0 
+##  [9] yaml_2.2.0       utf8_1.1.4       rlang_0.4.0      ggpubr_0.2.3    
+## [13] pillar_1.4.2     glue_1.3.1       withr_2.1.2      modelr_0.1.5    
+## [17] readxl_1.3.1     lifecycle_0.1.0  ggsignif_0.6.0   munsell_0.5.0   
+## [21] blogdown_0.17    gtable_0.3.0     cellranger_1.1.0 rvest_0.3.4     
+## [25] evaluate_0.14    labeling_0.3     fansi_0.4.0      broom_0.5.2     
+## [29] Rcpp_1.0.2       scales_1.0.0     backports_1.1.5  formatR_1.7     
+## [33] jsonlite_1.6     hms_0.5.1        digest_0.6.21    stringi_1.4.3   
+## [37] ggrepel_0.8.1    bookdown_0.16    grid_3.6.1       cli_1.1.0       
+## [41] tools_3.6.1      magrittr_1.5     lazyeval_0.2.2   crayon_1.3.4    
+## [45] pkgconfig_2.0.3  zeallot_0.1.0    ellipsis_0.3.0   xml2_1.2.2      
+## [49] lubridate_1.7.4  assertthat_0.2.1 rmarkdown_1.16   httr_1.4.1      
+## [53] rstudioapi_0.10  R6_2.4.0         nlme_3.1-140     compiler_3.6.1</code></pre>
+<pre><code>## [1] &quot;2019-12-13 10:18:18 CST&quot;</code></pre>
+<pre><code>##                                                                                             sysname 
+##                                                                                            &quot;Darwin&quot; 
+##                                                                                             release 
+##                                                                                            &quot;18.7.0&quot; 
+##                                                                                             version 
+## &quot;Darwin Kernel Version 18.7.0: Thu Jun 20 18:42:21 PDT 2019; root:xnu-4903.270.47~4/RELEASE_X86_64&quot; 
+##                                                                                            nodename 
+##                                                          &quot;wireless-10-147-203-36.public.utexas.edu&quot; 
+##                                                                                             machine 
+##                                                                                            &quot;x86_64&quot; 
+##                                                                                               login 
+##                                                                                          &quot;yijinzou&quot; 
+##                                                                                                user 
+##                                                                                          &quot;yijinzou&quot; 
+##                                                                                      effective_user 
+##                                                                                          &quot;yijinzou&quot;</code></pre>
 </div>
-</div>
-<div id="r-version-3.6.1-2019-07-05" class="section level2">
-<h2>R version 3.6.1 (2019-07-05)</h2>
-</div>
-<div id="platform-x86_64-apple-darwin15.6.0-64-bit" class="section level2">
-<h2>Platform: x86_64-apple-darwin15.6.0 (64-bit)</h2>
-</div>
-<div id="running-under-macos-mojave-10.14.6" class="section level2">
-<h2>Running under: macOS Mojave 10.14.6</h2>
-</div>
-<div id="section" class="section level2">
-<h2></h2>
-</div>
-<div id="matrix-products-default" class="section level2">
-<h2>Matrix products: default</h2>
-</div>
-<div id="blas-libraryframeworksr.frameworkversions3.6resourcesliblibrblas.0.dylib" class="section level2">
-<h2>BLAS: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRblas.0.dylib</h2>
-</div>
-<div id="lapack-libraryframeworksr.frameworkversions3.6resourcesliblibrlapack.dylib" class="section level2">
-<h2>LAPACK: /Library/Frameworks/R.framework/Versions/3.6/Resources/lib/libRlapack.dylib</h2>
-</div>
-<div id="section-1" class="section level2">
-<h2></h2>
-</div>
-<div id="locale" class="section level2">
-<h2>locale:</h2>
-</div>
-<div id="en_us.utf-8en_us.utf-8en_us.utf-8cen_us.utf-8en_us.utf-8" class="section level2">
-<h2>[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</h2>
-</div>
-<div id="section-2" class="section level2">
-<h2></h2>
-</div>
-<div id="attached-base-packages" class="section level2">
-<h2>attached base packages:</h2>
-</div>
-<div id="stats-graphics-grdevices-utils-datasets-methods-base" class="section level2">
-<h2>[1] stats graphics grDevices utils datasets methods base</h2>
-</div>
-<div id="section-3" class="section level2">
-<h2></h2>
-</div>
-<div id="other-attached-packages" class="section level2">
-<h2>other attached packages:</h2>
-</div>
-<div id="factoextra_1.0.5-forcats_0.4.0-stringr_1.4.0-dplyr_0.8.3" class="section level2">
-<h2>[1] factoextra_1.0.5 forcats_0.4.0 stringr_1.4.0 dplyr_0.8.3</h2>
-</div>
-<div id="purrr_0.3.2-readr_1.3.1-tidyr_1.0.0-tibble_2.1.3" class="section level2">
-<h2>[5] purrr_0.3.2 readr_1.3.1 tidyr_1.0.0 tibble_2.1.3</h2>
-</div>
-<div id="ggplot2_3.2.1-tidyverse_1.2.1-knitr_1.25" class="section level2">
-<h2>[9] ggplot2_3.2.1 tidyverse_1.2.1 knitr_1.25</h2>
-</div>
-<div id="section-4" class="section level2">
-<h2></h2>
-</div>
-<div id="loaded-via-a-namespace-and-not-attached" class="section level2">
-<h2>loaded via a namespace (and not attached):</h2>
-</div>
-<div id="tidyselect_0.2.5-xfun_0.10-haven_2.1.1-lattice_0.20-38" class="section level2">
-<h2>[1] tidyselect_0.2.5 xfun_0.10 haven_2.1.1 lattice_0.20-38</h2>
-</div>
-<div id="colorspace_1.4-1-vctrs_0.2.0-generics_0.0.2-htmltools_0.4.0" class="section level2">
-<h2>[5] colorspace_1.4-1 vctrs_0.2.0 generics_0.0.2 htmltools_0.4.0</h2>
-</div>
-<div id="yaml_2.2.0-utf8_1.1.4-rlang_0.4.0-ggpubr_0.2.3" class="section level2">
-<h2>[9] yaml_2.2.0 utf8_1.1.4 rlang_0.4.0 ggpubr_0.2.3</h2>
-</div>
-<div id="pillar_1.4.2-glue_1.3.1-withr_2.1.2-modelr_0.1.5" class="section level2">
-<h2>[13] pillar_1.4.2 glue_1.3.1 withr_2.1.2 modelr_0.1.5</h2>
-</div>
-<div id="readxl_1.3.1-lifecycle_0.1.0-ggsignif_0.6.0-munsell_0.5.0" class="section level2">
-<h2>[17] readxl_1.3.1 lifecycle_0.1.0 ggsignif_0.6.0 munsell_0.5.0</h2>
-</div>
-<div id="blogdown_0.17-gtable_0.3.0-cellranger_1.1.0-rvest_0.3.4" class="section level2">
-<h2>[21] blogdown_0.17 gtable_0.3.0 cellranger_1.1.0 rvest_0.3.4</h2>
-</div>
-<div id="evaluate_0.14-labeling_0.3-fansi_0.4.0-broom_0.5.2" class="section level2">
-<h2>[25] evaluate_0.14 labeling_0.3 fansi_0.4.0 broom_0.5.2</h2>
-</div>
-<div id="rcpp_1.0.2-scales_1.0.0-backports_1.1.5-formatr_1.7" class="section level2">
-<h2>[29] Rcpp_1.0.2 scales_1.0.0 backports_1.1.5 formatR_1.7</h2>
-</div>
-<div id="jsonlite_1.6-hms_0.5.1-digest_0.6.21-stringi_1.4.3" class="section level2">
-<h2>[33] jsonlite_1.6 hms_0.5.1 digest_0.6.21 stringi_1.4.3</h2>
-</div>
-<div id="ggrepel_0.8.1-bookdown_0.16-grid_3.6.1-cli_1.1.0" class="section level2">
-<h2>[37] ggrepel_0.8.1 bookdown_0.16 grid_3.6.1 cli_1.1.0</h2>
-</div>
-<div id="tools_3.6.1-magrittr_1.5-lazyeval_0.2.2-crayon_1.3.4" class="section level2">
-<h2>[41] tools_3.6.1 magrittr_1.5 lazyeval_0.2.2 crayon_1.3.4</h2>
-</div>
-<div id="pkgconfig_2.0.3-zeallot_0.1.0-ellipsis_0.3.0-xml2_1.2.2" class="section level2">
-<h2>[45] pkgconfig_2.0.3 zeallot_0.1.0 ellipsis_0.3.0 xml2_1.2.2</h2>
-</div>
-<div id="lubridate_1.7.4-assertthat_0.2.1-rmarkdown_1.16-httr_1.4.1" class="section level2">
-<h2>[49] lubridate_1.7.4 assertthat_0.2.1 rmarkdown_1.16 httr_1.4.1</h2>
-</div>
-<div id="rstudioapi_0.10-r6_2.4.0-nlme_3.1-140-compiler_3.6.1" class="section level2">
-<h2>[53] rstudioapi_0.10 R6_2.4.0 nlme_3.1-140 compiler_3.6.1</h2>
-<pre><code></code></pre>
-</div>
-<div id="cst" class="section level2">
-<h2>[1] “2019-12-12 16:35:08 CST”</h2>
-<pre><code></code></pre>
-</div>
-<div id="sysname" class="section level2">
-<h2>sysname</h2>
-</div>
-<div id="darwin" class="section level2">
-<h2>“Darwin”</h2>
-</div>
-<div id="release" class="section level2">
-<h2>release</h2>
-</div>
-<div id="section-5" class="section level2">
-<h2>“18.7.0”</h2>
-</div>
-<div id="version" class="section level2">
-<h2>version</h2>
-</div>
-<div id="darwin-kernel-version-18.7.0-thu-jun-20-184221-pdt-2019-rootxnu-4903.270.474release_x86_64" class="section level2">
-<h2>“Darwin Kernel Version 18.7.0: Thu Jun 20 18:42:21 PDT 2019; root:xnu-4903.270.47~4/RELEASE_X86_64”</h2>
-</div>
-<div id="nodename" class="section level2">
-<h2>nodename</h2>
-</div>
-<div id="cara-yijin-zou.local" class="section level2">
-<h2>“Cara-Yijin-Zou.local”</h2>
-</div>
-<div id="machine" class="section level2">
-<h2>machine</h2>
-</div>
-<div id="x86_64" class="section level2">
-<h2>“x86_64”</h2>
-</div>
-<div id="login" class="section level2">
-<h2>login</h2>
-</div>
-<div id="yijinzou" class="section level2">
-<h2>“yijinzou”</h2>
-</div>
-<div id="user" class="section level2">
-<h2>user</h2>
-</div>
-<div id="yijinzou-1" class="section level2">
-<h2>“yijinzou”</h2>
-</div>
-<div id="effective_user" class="section level2">
-<h2>effective_user</h2>
-</div>
-<div id="yijinzou-2" class="section level2">
-<h2>“yijinzou”</h2>
-<p>```</p>
 </div>
 
               <hr>

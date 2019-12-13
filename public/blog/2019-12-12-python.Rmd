@@ -8,13 +8,13 @@ tags: []
 description: ''
 ---
 
+## K-mers
 
+In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find k-mers in a sequence and record the frequency number in a dictionary. 
 
-<div id="k-mers" class="section level2">
-<h2>K-mers</h2>
-<p>In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find k-mers in a sequence and record the frequency number in a dictionary.</p>
-<pre class="python"><code>
-my_seq1 = &quot;CAGCCCAATC&quot;
+```{python}
+
+my_seq1 = "CAGCCCAATC"
   
 def findkmers(k, seq):
     dict1={}
@@ -32,33 +32,26 @@ def findkmers(k, seq):
     print (dict1)
 
 def main():
-   print(&quot;For the sequence: CAGCCCAATC&quot;)
+   print("For the sequence: CAGCCCAATC")
    for i in range (1,5):
-      print(&quot;The&quot;, str(i)+&quot;-mers are :&quot;)
+      print("The", str(i)+"-mers are :")
       findkmers(i, my_seq1)
 
-main()</code></pre>
-<pre><code>## For the sequence: CAGCCCAATC
-## The 1-mers are :
-## {&#39;C&#39;: 5, &#39;A&#39;: 3, &#39;G&#39;: 1, &#39;T&#39;: 1}
-## The 2-mers are :
-## {&#39;CA&#39;: 2, &#39;AG&#39;: 1, &#39;GC&#39;: 1, &#39;CC&#39;: 2, &#39;AA&#39;: 1, &#39;AT&#39;: 1, &#39;TC&#39;: 1}
-## The 3-mers are :
-## {&#39;CAG&#39;: 1, &#39;AGC&#39;: 1, &#39;GCC&#39;: 1, &#39;CCC&#39;: 1, &#39;CCA&#39;: 1, &#39;CAA&#39;: 1, &#39;AAT&#39;: 1, &#39;ATC&#39;: 1}
-## The 4-mers are :
-## {&#39;CAGC&#39;: 1, &#39;AGCC&#39;: 1, &#39;GCCC&#39;: 1, &#39;CCCA&#39;: 1, &#39;CCAA&#39;: 1, &#39;CAAT&#39;: 1, &#39;AATC&#39;: 1}</code></pre>
-</div>
-<div id="sequence-alignment" class="section level2">
-<h2>Sequence Alignment</h2>
-<p>Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences. For example, in my research lab, we use BLAST pairwise alignment on a sequence obtained from DNA sequencing to verify that the DNA matches the known sequence or to check if a desired mutation was successful. Both the Needleman-Wunsch algorithm and Smith-Waterman algorithm are useful ways to achieve this.</p>
-<pre class="python"><code># Use these values to calculate scores
+main()
+```
+
+## Sequence Alignment 
+Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences. For example, in my research lab, we use BLAST pairwise alignment on a sequence obtained from DNA sequencing to verify that the DNA matches the known sequence or to check if a desired mutation was successful. Both the Needleman-Wunsch algorithm and Smith-Waterman algorithm are useful ways to achieve this. 
+
+```{python}
+# Use these values to calculate scores
 match_score = 2
 mismatch_score = -1
 gap_penalty = -1
 
 # Make a score matrix with these two sequences
-seq1 = &quot;ATGAT&quot;
-seq2 = &quot;AAGGAT&quot;
+seq1 = "ATGAT"
+seq2 = "AAGGAT"
 
 def match_fun(a,b):  # Helper function to define match/mismatch scores
     if a==b:
@@ -112,7 +105,7 @@ def sw_fun(seq1,seq2,gap_penalty=-1, match_score=1, mismatch_score=-1):
             
     for i in range(n+1): 
         for j in range(m+1): 
-            if score[i][j]&lt;0: 
+            if score[i][j]<0: 
                 score[i][j]=0
     return score
 
@@ -121,40 +114,22 @@ def display(matrix):
     numCols=len(matrix[0]) #should be equal for all, pick any row
     for row in range (numRows):
         for col in range(numCols): 
-            print(format(matrix[row][col], &quot;3d&quot;), end=&quot;&quot;)
-        print(&quot;&quot;)
+            print(format(matrix[row][col], "3d"), end="")
+        print("")
 
 def main2(): 
-    print(&quot;For the two sequences:&quot;, seq1,&quot;and&quot;, seq2)
-    print(&quot;Needleman-Wunsch&quot;)
+    print("For the two sequences:", seq1,"and", seq2)
+    print("Needleman-Wunsch")
     nwmatrix= nw_fun(seq1,seq2,gap_penalty,match_score,mismatch_score)
     display(nwmatrix)   
     
-    print(&quot;&quot;)
+    print("")
     
-    print(&quot;Smith-Waterman&quot;)
+    print("Smith-Waterman")
     swmatrix= sw_fun(seq1,seq2,gap_penalty,match_score,mismatch_score)
     display(swmatrix) 
 
-main2()</code></pre>
-<pre><code>## For the two sequences: ATGAT and AAGGAT
-## Needleman-Wunsch
-##   0 -1 -2 -3 -4 -5  0
-##  -1  2  1  0 -1 -2  0
-##  -2  1  1  0  2  1  0
-##  -3  0  0  3  2  1  0
-##  -4 -1 -1  2  2  1  0
-##  -5 -2 -2  1  4  3  0
-##  -6 -3  0  0  3  6  0
-##   0  0  0  0  0  0  0
-## 
-## Smith-Waterman
-##   0  0  0  0  0  0  0
-##   0  2  1  0  0  0  0
-##   0  1  0  0  2  1  0
-##   0  0  0  2  1  0  0
-##   0  0  0  1  0  0  0
-##   0  0  0  0  3  2  0
-##   0  0  0  0  2  5  0
-##   0  0  0  0  0  0  0</code></pre>
-</div>
+main2()
+
+```
+

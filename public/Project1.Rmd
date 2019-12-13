@@ -57,8 +57,7 @@ nrow(join2)
 ```
 Initially, the tuberculosis dataset had 432 cases while the GDP dataset had 528 cases. An inner join was chosen so that all countries remaining would contain information for tuberculosis and their GDP. This resulted in 360 observations remaining with 72 cases being dropped from the tuberculosis dataset and 168 cases dropped from the GDP dataset. Problems include that rows with NAs are more likely to be smaller and poorer countries with less documentation of the data which may skew the results. 
 
-###Wrangling: filter, select, arrange, group_by, mutate, summarize
-#(mean, sd, var, n, quantile, min, max, n_distinct, cor, etc) of numeric variables overall and after grouping by one of your categorical variables (either together or one-at-a-time; if you have two categorical variables, try to include at least one statistic based on a grouping of two categorical variables simultaneously). If you do not have any categorical variables, create one using mutate to satisfy the requirements above. Ideally, you will find a way to show these summary statistics in an easy-to-read table (e.g., by reshaping). If you have lots of numeric variables, or your categorical variables have too many categories, just pick a few (either numeric variables or categories of a categorical variable) and summarize based on those. It would be a good idea to show a correlation matrix for your numeric variables!
+### Wrangling: filter, select, arrange, group_by, mutate, summarize
 
 ```{R}
 #Determining the quantile of GDP and population for each country 
@@ -103,7 +102,7 @@ join2%>%select_if(is.numeric)%>%cor()%>%round(2)
 ```
 The correlation matrix shows that the strongest positive correlations are between new pulmonary TB cases and population number; new pulmonary TB cases and total number of TB cases; new pulmonary TB cases and total mortality due to TB; previous MDR TB cases and number of MDR cases that were tested for additional resistance. The strongest negative correlations are GDP and the TB cases per 100,000 people; GDP and TB mortality per 100,000 people. 
 
-###Visualizing
+### Visualizing
 ```{R}
 
 #GGPlot 1: Scatterplot
@@ -127,7 +126,7 @@ ggplot(ntile, aes(x = ntileGDP, y = TB_mort.100k, fill=year))+
 ```
 A stacked bar plot was used to demonstrate how increasing GDP per capita results in a lower TB mortality on average. The biggest change in TB mortality between 2017 and 2018 is represented in the countries in the 1st quantile of GDP per capita (however, the error bars are overlapping). As the quantile of GDP increases, the spread of the data (error bars) also decrease. 
 
-###Dimensionality Reduction (- Do clustering or PCA (on at least your numerics),  visualize (i.e., in addition to your other plots), and interpret if possible (don't stress too much about this either)!)
+### Dimensionality Reduction (- Do clustering or PCA (on at least your numerics),  visualize (i.e., in addition to your other plots), and interpret if possible (don't stress too much about this either)!)
 ```{R}
 #Prepare data by scaling 
 joinPCA<-join2%>%select_if(is.numeric)%>%scale%>%na.omit
@@ -166,7 +165,7 @@ library("factoextra")
 fviz_pca_biplot(join_pca)
 ```
 
-```
+
 Based on the scree plot and cumulative proportion of variance (and Kaiser's rule), 3 to 4 PCs should be chosen. High scores on PC1 indicate low TB cases (new, previous, MDR TB, mortality, etc.) and low population. For PC2, high scores indicate high TB cases and mortality per 100,000 people but lower resistant (MDR and XDR) TB cases as well as lower GDP per capita. For PC3, high scores indicate lower cases of resistant TB cases and lower TB cases and mortality per 100,000 people but higher GDP. On the PCA plot, there appears to be some seperation based on GDP looking at PC3 (larger dots on the right). Finally, high scores PC4 indicate high numbers of confirmed TB cases with unknown TB treatment history.
 
 The plot of loadings helps visualize which variances contribute to which of the PCs with a smaller angle between vectors showing higher correlation. Therefore, GDP is negatively correlated to the other variables and mainly differs based on PC1. Contrastingly, other variables such as new cases of pulmonary TB, previous treated pulmonary TB cases, total TB cases, etc. are almost redundant. 

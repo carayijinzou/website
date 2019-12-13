@@ -24,7 +24,7 @@ knit_hooks$set(output = function(x, options) {
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE,fig.align="center",warning=FALSE,message=FALSE,fig.width=8, fig.height=5, linewidth=60)
 options(tibble.width = 100,width = 100)
 ```
-##Cara (Yijin)Zou
+## Cara (Yijin)Zou
 
 # Modeling
 
@@ -33,11 +33,11 @@ library(tidyverse)
 TB_Data<-read.csv("/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv", header=T)%>%dplyr::select(-1, -Country.Code)
 
 ```
-#Introduction 
+# Introduction 
 This dataset is comprised of a merged dataset from [World Health Organization](https://www.who.int/tb/country/data/download/en/) and [The World Bank Group](https://data.worldbank.org/indicator/NY.GDP.PCAP.CD). It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars. 
 
 
-#MANOVA testing
+# MANOVA testing
 ```{R}
  #H0: For each response variable, the means of the groups are equal
  #H1: For at least one response variable, at least one group mean differs
@@ -57,7 +57,7 @@ summary.aov(man1)
 Of the 10 dependent variables tested, the univariate ANOVAs with a p-value <0.05 include: new.pul.TB, prev.treated.pul.TB, prev.unk.pul.TB, pop.number, TB.100k, TB_mort.100k, and GDP. 
 
 
-##Post hoc t-testing
+## Post hoc t-testing
 ```{R}
 
 # region in world: AFR=Africa; AMR=Americas;
@@ -87,7 +87,7 @@ pairwise.t.test(TB_Data$GDP,TB_Data$region,p.adj="none")
 
 ```
 
-##Bonferroni correction 
+## Bonferroni correction 
 ```{R}
 #MANOVA: 1 
 #ANOVA: 11
@@ -107,7 +107,7 @@ The total number of tests conducted is 117, therefore if unadjusted, the probabi
 Using this new alpha value, the MANOVA is still significant. The ANOVAs of new.pul.TB, prev.treated.pul.TB, pop.number, TB.100k, TB_mort.100k, and GDP are still significant. Only the ANOVA of prev.unk.pul.TB is no longer significant (p-value=0.005189). For the post-hoc analysis of the new pulmonary TB cases, previously treated pulmonary TB, and population number only the means of SEA are different from the other regions. For TB.100k there are significant differences between AFR/AMR, AFR/EMR, AFR/EUR, AMR/SEA, AMR/WPR, SEA/EMR, EUR/SEA, and EUR/WPR. For the TB mortality for every 100,000 individuals, AFR is significantly different from the other regions. For GDP, AFR/EMR, AFR/EUR, AFR/WPR,  AMR/EUR, EUR/SEA, and EUR/WPR are significantly different. 
 
 
-#Randomization test: PERMANOVA 
+# Randomization test: PERMANOVA 
 
 ```{R}
 #H0: The centroid and dispersion of points is the same for the different regions
@@ -144,7 +144,7 @@ mean(Fs>F_obs)  #p-value
 Since the data is unlikely to meet the assumptions of the MANOVA, a randomization-test MANOVA (PERMANOVA) was conducted which resulted in a p-value < 0.05 (significant). Therefore the null hypothesis is rejected in favor of the alternative hypothesis that there is a significant difference between the centroid and/or the spread of the points is not equal between the different regions. This therefore supports the conclusion of the MANOVA conducted previously. 
 
 
-#Linear regression model
+# Linear regression model
 ```{R}
 
 TB_Data$GDP_c <- TB_Data$GDP - mean(TB_Data$GDP, na.rm = T)
@@ -158,13 +158,13 @@ For the model with uncorrected standard errors, controlling for region, for ever
 effect of GDP on the mortality due to tuberculosis per 100,00 people depending on which region the country is in (the slope difference between the regions). For example, the slope difference between AFR and:  AMR (2.651e-03), EMR (2.457e-03), EUR (2.789e-03), SEA (-6.893e-04), and WPR (2.541e-03).  
 
 
-##Plot the regression
+## Plot the regression
 ```{R}
 TB_Data%>%ggplot(aes(x=GDP_c, y=TB_mort.100k_c,group=region))+geom_point(aes(color=region))+geom_smooth(method = 'lm',se=F, aes(color=region))
 
 ```
 
-##Asumptions
+## Asumptions
 ```{R}
 #Linear relationship between each predictor and response (no scatterplot for region since it is categorical)
 ggplot(TB_Data, aes(x=GDP_c, y=TB_mort.100k_c,group=region))+geom_point(aes(color=region))
@@ -183,7 +183,7 @@ bptest(fit1)
 ```
 The data fails all assumptions. The scatterplot does not show a linear relationship between GDP and TB_mort.100k. The QQ-plot of the model residuals is also not normal. There is also a funneling pattern in the residual plot which indicates that it does not meet the assumption of equal variance (homoskedasticity). This is again confirmed by the Breusch-Pagan test which concluded that the homoskedasticity assumption is not met (p-value=1.905e-08).
 
-##Recompute regression results with robust standard errors
+## Recompute regression results with robust standard errors
 ```{R}
 #robust SEs
 coeftest(fit1, vcov = vcovHC(fit1))
@@ -191,13 +191,13 @@ coeftest(fit1, vcov = vcovHC(fit1))
 ```
 A model with robust standard errors should be used if the data is heteroskedastic. With uncorrected standard errors, the coefficient estimates of the main effect of GDP (p-value = 0.0162) was significant. The interactions GDP_c:regionAMR (p-value= 0.0472), GDP_c:regionEMR (p-value= 0.0437), GDP_c:regionEUR (p-value= 0.0198), and GDP_c:regionWPR (p-value= 0.0361) were also significant. Contrastingly, using the more robust SEs (more conservative), none of the coefficient estimates are still significant. 
 
-##Effect Size 
+## Effect Size 
 ```{R}
 summary(fit1)$adj.r.squared
 ```
 The adjusted r-squared of 0.356 indicates that 35.6% of variation in the mean number of cases of mortality due to tuberculosis per 100,000 people is explained by the model. 
 
-##Regression but without interactions
+## Regression but without interactions
 ```{R}
 fit2<-lm(TB_mort.100k_c ~ GDP_c+region, data=TB_Data)
 summary(fit2)
@@ -205,7 +205,7 @@ summary(fit2)
 ```
 Examining only the main effects, the effect of GDP is no longer significant while all the coeficient estimates for region are now significant. 
 
-##Linear regression model with bootstrapped standard errors
+## Linear regression model with bootstrapped standard errors
 
 ```{R}
 
@@ -224,7 +224,7 @@ samp_distn%>%t%>%as.data.frame%>%summarise_all(sd)
 Bootstrapped standard errors are used when the data is non-normal as well. Compared to the original standard errors, the standard errors for all the coefficient estimates increased (more conservative). The p-values are therefore higher as well because of the higher standard errors. Compared to the robust standard errors, the bootstrapped standard errors are also higher. Therefore, the p-values are also higher (more conservative). 
 
 
-#Logistic regression predicting a binary categorical variable 
+# Logistic regression predicting a binary categorical variable 
 
 ```{R}
 BinaryTB<-TB_Data%>%mutate(y = as.numeric(ifelse(XDR > 0, 1, 0)))
@@ -237,7 +237,7 @@ A binary variable was created that measures whether there are any XDR (extensive
 
 
 
-##Confusion Matrix
+## Confusion Matrix
 ```{R}
 prob <- predict(fit4, type = "response") #get predictions
 pred <- ifelse(prob > 0.5, 1, 0)
@@ -277,7 +277,7 @@ From the confusion matrix, the model has an accuracy of 0.743 which is fair. The
 
 
 
-##Density of log-odds (logit)  
+## Density of log-odds (logit)  
 
 ```{R}
 BinaryTB$logit<-predict(fit4) #get predicted log-odds
@@ -287,7 +287,7 @@ ggplot(BinaryTB,aes(logit, fill=factor.y))+geom_density(alpha=.3)+
 
 
 ```
-##ROC Curve
+## ROC Curve
 
 ```{R}
 library(plotROC)
@@ -301,7 +301,7 @@ calc_auc(ROCplot1)
 The AUC is determined to be 0.837 which suggests that the model is good at predicting whether a country has a case of XDR TB (the probability that a randomly selected country with a case of XDR TB has a higher prediction than a randomly selected country without a case of XDR TB). 
 
 
-##10-fold CV 
+## 10-fold CV 
 ```{R}
 k = 10
 data1 <- BinaryTB[sample(nrow(BinaryTB)), ] #put dataset in random order
@@ -321,7 +321,7 @@ apply(diags, 2, mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS
 ```
 The out of sample confusion matrix for this model has: accuracy (0.742- fair), sensitivity (0.625- poor), specificity (0.811- good), precision (0.692- poor). Although, precision decreased from fair to poor, the classifications did not change greatly. The AUC also did not change significantly which suggests that there was not overfitting. 
 
-#LASSO (least absolute shrinkage and selection operator) Regression
+# LASSO (least absolute shrinkage and selection operator) Regression
 ```{R}
 head(BinaryTB)
 LassoTB<-BinaryTB%>%dplyr::select(region,year,new.pul.TB, prev.treated.pul.TB, prev.unk.pul.TB,new.MDR, prev.MDR, MDR.tested,pop.number, TB.100k, TB.num, TB_mort.100k, TB_mort.num,GDP,y)  
@@ -338,7 +338,7 @@ coef(lasso)
 Variables with a non-zero coefficient from LASSO will be retained in the model: region, new.MDR, pop.number, TB.100k, and GDP. Therefore, these are the most important predictors of if a country has atleast one case of XDR TB. 
 
 
-#Perform 10-fold CV using LASSO model
+# Perform 10-fold CV using LASSO model
 ```{R}
 #Model with just non-zero lasso coefficient estimates
 fit6 <- glm(y ~ region+new.MDR+pop.number+TB.100k+GDP, data = LassoTB, family = "binomial")
