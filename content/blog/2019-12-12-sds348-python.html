@@ -370,6 +370,8 @@ summary {
 </div>
 
 
+<div id="k-mers" class="section level2">
+<h2>K-mers</h2>
 <p>In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find k-mers in a sequence and record the frequency number in a dictionary.</p>
 <pre class="python"><code>
 my_seq1 = &quot;CAGCCCAATC&quot;
@@ -405,6 +407,9 @@ main()</code></pre>
 ## {'CAG': 1, 'AGC': 1, 'GCC': 1, 'CCC': 1, 'CCA': 1, 'CAA': 1, 'AAT': 1, 'ATC': 1}
 ## The 4-mers are :
 ## {'CAGC': 1, 'AGCC': 1, 'GCCC': 1, 'CCCA': 1, 'CCAA': 1, 'CAAT': 1, 'AATC': 1}</code></pre>
+</div>
+<div id="sequence-alignment" class="section level2">
+<h2>Sequence Alignment</h2>
 <p>Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences. For example, in my research lab, we use BLAST pairwise alignment on a sequence obtained from DNA sequencing to verify that the DNA matches the known sequence or to check if a desired mutation was successful. Both the Needleman-Wunsch algorithm and Smith-Waterman algorithm are useful ways to achieve this.</p>
 <pre class="python"><code># Use these values to calculate scores
 match_score = 2
@@ -512,6 +517,7 @@ main2()</code></pre>
 ##   0  0  0  0  3  2  0
 ##   0  0  0  0  2  5  0
 ##   0  0  0  0  0  0  0</code></pre>
+</div>
 
 
 
