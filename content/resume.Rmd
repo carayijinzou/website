@@ -1,7 +1,7 @@
 ---
-title: "About Me and Resume"
+title: "About Me"
 author: "Cara Yijin Zou"
-date: "12/12/2019"
+date: '2019-12-12'
 output: html_document
 ---
 

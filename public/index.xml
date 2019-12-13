@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>About Me</title>
+      <link>/resume/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>About Me My name is Cara (Yijin) Zou and I’m currently a junior computational biology major at UT Austin. I’m also a pre-dental student. I’m from Katy, Texas but I’ve also lived in China, Canada, Malaysia, and Singapore! I’m currently involved in research in the Virtual Drug Screening/Virtual Cures stream where I am trying to identify a potential drug for D-alanine D-alanine ligase (Mycobacterium tuberculosis) using both computational and wet lab methods (fun fact: the picture on the home page is a PyMol 3D representation of this enzyme).</description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>/blog/python/</link>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
@@ -28,15 +37,6 @@
       
       <guid>/projects/</guid>
       <description>Projects Here are some projects I have been working on: - Project 1 - Project 2 </description>
-    </item>
-    
-    <item>
-      <title>About Me and Resume</title>
-      <link>/resume/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/resume/</guid>
-      <description>About Me My name is Cara (Yijin) Zou and I’m currently a junior computational biology major at UT Austin. I’m also a pre-dental student. I’m from Katy, Texas but I’ve also lived in China, Canada, Malaysia, and Singapore! I’m currently involved in research in the Virtual Drug Screening/Virtual Cures stream where I am trying to identify a potential drug for D-alanine D-alanine ligase (Mycobacterium tuberculosis) using both computational and wet lab methods (fun fact: the picture on the home page is a PyMol 3D representation of this enzyme).</description>
     </item>
     
     <item>
