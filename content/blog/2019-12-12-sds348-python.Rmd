@@ -113,7 +113,7 @@ def display(matrix):
             print(format(matrix[row][col], "3d"), end="")
         print("")
 
-def main(): 
+def main2(): 
     print("For the two sequences:", seq1,"and", seq2)
     print("Needleman-Wunsch")
     nwmatrix= nw_fun(seq1,seq2,gap_penalty,match_score,mismatch_score)
@@ -125,7 +125,7 @@ def main():
     swmatrix= sw_fun(seq1,seq2,gap_penalty,match_score,mismatch_score)
     display(swmatrix) 
 
-main()
+main2()
 
 ```
 
