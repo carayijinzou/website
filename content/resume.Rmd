@@ -15,7 +15,7 @@ opts_chunk$set(fig.align="center", fig.height=5, message=FALSE, fig.width=8,tidy
   My name is Cara (Yijin) Zou and I'm currently a junior computational biology major at UT Austin. I'm also a pre-dental student. I'm from Katy, Texas but I've also lived in China, Canada, Malaysia, and Singapore! I'm currently involved in research in the Virtual Drug Screening/Virtual Cures stream where I am trying to identify a potential drug for D-alanine D-alanine ligase (*Mycobacterium tuberculosis*) using both computational and wet lab methods (fun fact: the picture on the home page is a PyMol 3D representation of this enzyme). 
   
 # Resume 
-Here is a pdf version of my [resume](/static/Resume Winter 2019.pdf). 
+Here is a pdf version of my [resume](/Resume Winter 2019.pdf). 
 
 ## Education
 ### Bachelor of Science, Computational Biology   (May 2021)
