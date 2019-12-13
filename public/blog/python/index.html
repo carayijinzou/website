@@ -112,8 +112,8 @@ main()</code></pre>
 </div>
 <div id="sequence-alignment" class="section level2">
 <h2>Sequence Alignment</h2>
-<p>Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences. For example, in my research lab, we use BLAST pairwise alignment on a sequence obtained from DNA sequencing to verify that the DNA matches the known sequence or to check if a desired mutation was successful. Both the Needleman-Wunsch algorithm and Smith-Waterman algorithm are useful ways to find the best alignment.</p>
-<p>Here is an example of alignment scores between a sequence in a <em>Mycobacterium tuberculosis</em> sequence compared to humans (low alignment scores) and all organisms (high alignment scores).</p>
+<p>Sequence alignment is a very important technique used in genetics and is useful for both protein and nucleotide sequences. For example, in my research lab, we use BLAST pairwise alignment on a sequence obtained from DNA sequencing to verify that the DNA matches the known sequence or to check if a desired mutation was successful. Both the Needleman-Wunsch algorithm (global alignment) and Smith-Waterman algorithm (local alignment) are useful ways to find the best alignment.</p>
+<p>Here is an example of alignment scores between a sequence found in the <em>Mycobacterium tuberculosis</em> genome compared to humans (low alignment scores as expected) and all organisms (higher alignment scores).</p>
 <p><img src="/BLASThumanMtDala.png" alt="BLAST Nucleotide MtDala against Human genomic plus transcript (Human G+T)" />
 <img src="/BLASTMtDalaOther.png" alt="BLAST Nucleotide MtDala against All Organisms" /></p>
 <pre class="python"><code># Use these values to calculate scores
