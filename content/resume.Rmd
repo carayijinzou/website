@@ -22,10 +22,6 @@ Here is a pdf version of my [resume](/Resume Winter 2019.pdf).
 #### University of Texas at Austin
 ##### University Honors all semesters 
 
-## Interests
-Micah 6 Food Pantry Volunteer  (120+ hours)\
-Origami Circle Officer\
-
 ## Skills
 Proficient in Microsoft Office (Word, PowerPoint, and Excel)\
 Conversational Proficiency in Chinese (Mandarin)\
@@ -38,7 +34,6 @@ Basic knowledge of Python\
 • Graded weekly homework and labs and provided detailed feedback to students for improvement.\
 •	Proctored exams. \ 
 
-
 #### Undergraduate Researcher and Mentor (January 2019 – Present)\
 •	Use of computational methods to identify potential protein inhibitors: PyMOL, Genetic Optimization for Ligand Docking (GOLD)\
 •	Use of wet lab techniques: Midi-prep DNA extraction, agarose gel electrophoresis, DNA sequencing analysis, protein expression, sodium dodecyl sulfate–polyacrylamide (SDS-PAGE) gel electrophoresis, Ni-NTA affinity chromatography, ion exchange chromatography, enzyme assays, site directed mutagenesis, PCR,  Cryopreservation (snap freezing), Differential Scanning Fluorimetry (DSF)\
@@ -50,6 +45,10 @@ Basic knowledge of Python\
 ## Accomplishments
 College of Natural Sciences 2019 Second Year Excellence Award\
 Honorable Texas Pre-Dental Society Member\
+
+## Interests
+Micah 6 Food Pantry Volunteer  (120+ hours)\
+Origami Circle Officer\
 
 ## Contact 
 [cara.yijin.zou@utexas.edu](cara.yijin.zou@utexas.edu)
