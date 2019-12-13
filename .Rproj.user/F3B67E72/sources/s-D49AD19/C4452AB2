@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "272671675",
+    "hash" : "0",
     "id" : "C4452AB2",
-    "lastKnownWriteTime" : 1576196777,
-    "last_content_update" : 1576196777232,
+    "lastKnownWriteTime" : 1576197438,
+    "last_content_update" : 1576197438752,
     "path" : "~/Desktop/SDS348Site/content/resume.Rmd",
     "project_path" : "content/resume.Rmd",
     "properties" : {
-        "cursorPosition" : "17,63",
-        "scrollLine" : "9"
+        "cursorPosition" : "33,0",
+        "scrollLine" : "19"
     },
     "read_only" : false,
     "read_only_alternatives" : [

@@ -25,7 +25,6 @@ Here is a pdf version of my [resume](/Resume Winter 2019.pdf).
 ## Interests
 Micah 6 Food Pantry Volunteer  (120+ hours)\
 Origami Circle Officer\
-Music (Piano, viola, voice)\
 
 ## Skills
 Proficient in Microsoft Office (Word, PowerPoint, and Excel)\
@@ -35,8 +34,10 @@ Basic knowledge of Python\
 
 ## Work Experience
 #### Undergraduate TA for Biostatistics SDS328M (August 2018 – December 2019)\
-•	Assisted during lecture and lab sessions by answering questions on statistics and R code; Proctored exams\ 
-•	Graded weekly homework and labs and provided detailed feedback to students for improvement.\ 
+•	Assisted during lecture and lab sessions by answering questions on statistics and R code. \
+• Graded weekly homework and labs and provided detailed feedback to students for improvement.\
+•	Proctored exams. \ 
+
 
 #### Undergraduate Researcher and Mentor (January 2019 – Present)\
 •	Use of computational methods to identify potential protein inhibitors: PyMOL, Genetic Optimization for Ligand Docking (GOLD)\
