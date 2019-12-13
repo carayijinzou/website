@@ -1,7 +1,7 @@
 ---
 title: 'Project 2: Modeling, Testing, and Predicting'
 author: "SDS348 Fall 2019"
-date: "November 26, 2019 "
+date: '2019-11-26'
 output:
   html_document: default
   pdf_document: default

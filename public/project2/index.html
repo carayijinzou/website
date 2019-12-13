@@ -61,7 +61,7 @@
         </div>
         <div class="blog-title">
           <h4>
-          January 1, 0001
+          November 26, 2019
             &nbsp;&nbsp;
             
           </h4>
@@ -351,7 +351,7 @@ SSW&lt;-new%&gt;%group_by(region)%&gt;%dplyr::select(new.pul.TB,prev.treated.pul
 {hist(Fs,prob = T); abline(v=F_obs, col=&quot;red&quot;, add=T)}</code></pre>
 <p><img src="/Project2_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>mean(Fs&gt;F_obs)  #p-value </code></pre>
-<pre><code>## [1] 0.007</code></pre>
+<pre><code>## [1] 0.008</code></pre>
 <p>Since the data is unlikely to meet the assumptions of the MANOVA, a randomization-test MANOVA (PERMANOVA) was conducted which resulted in a p-value &lt; 0.05 (significant). Therefore the null hypothesis is rejected in favor of the alternative hypothesis that there is a significant difference between the centroid and/or the spread of the points is not equal between the different regions. This therefore supports the conclusion of the MANOVA conducted previously.</p>
 </div>
 <div id="linear-regression-model" class="section level1">
@@ -497,11 +497,11 @@ samp_distn&lt;-replicate(5000, {
 samp_distn%&gt;%t%&gt;%as.data.frame%&gt;%summarise_all(sd)</code></pre>
 <pre><code>## (Intercept) GDP_c regionAMR regionEMR regionEUR
 regionSEA regionWPR GDP_c:regionAMR
-## 1 40.33982 0.003179245 40.34259 40.52288 40.33147
-42.98978 40.40999 0.003179793
+## 1 38.77334 0.003073219 38.77745 39.03267 38.77102
+41.47226 38.82896 0.003076079
 ## GDP_c:regionEMR GDP_c:regionEUR GDP_c:regionSEA
 GDP_c:regionWPR
-## 1 0.003186667 0.003179586 0.003445168 0.003180259</code></pre>
+## 1 0.00307618 0.003073361 0.003334132 0.003075588</code></pre>
 <p>Bootstrapped standard errors are used when the data is non-normal as well. Compared to the original standard errors, the standard errors for all the coefficient estimates increased (more conservative). The p-values are therefore higher as well because of the higher standard errors. Compared to the robust standard errors, the bootstrapped standard errors are also higher. Therefore, the p-values are also higher (more conservative).</p>
 </div>
 </div>
@@ -608,7 +608,7 @@ diags &lt;- rbind(diags, class_diag(probs, truth))
 }
 apply(diags, 2, mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS</code></pre>
 <pre><code>##       acc      sens      spec       ppv       auc 
-## 0.7436759 0.6325000 0.8247700 0.7117063 0.8508069</code></pre>
+## 0.7432806 0.6399134 0.8271317 0.7251770 0.8445975</code></pre>
 <p>The out of sample confusion matrix for this model has: accuracy (0.742- fair), sensitivity (0.625- poor), specificity (0.811- good), precision (0.692- poor). Although, precision decreased from fair to poor, the classifications did not change greatly. The AUC also did not change significantly which suggests that there was not overfitting.</p>
 </div>
 </div>
@@ -650,25 +650,25 @@ lasso &lt;- glmnet(x, y, family = &quot;binomial&quot;, lambda = cv$lambda.1se)
 coef(lasso)</code></pre>
 <pre><code>## 19 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
 ##                                s0
-## (Intercept)         -1.280359e+00
-## regionAMR           -9.392417e-03
-## regionEMR            5.857288e-01
-## regionEUR            1.624157e+00
-## regionSEA            2.860857e-01
-## regionWPR           -2.740013e-01
+## (Intercept)         -1.326116e+00
+## regionAMR           -1.329017e-02
+## regionEMR            6.344302e-01
+## regionEUR            1.675551e+00
+## regionSEA            2.748156e-01
+## regionWPR           -2.697245e-01
 ## year                 .           
 ## new.pul.TB           .           
 ## prev.treated.pul.TB  .           
 ## prev.unk.pul.TB      .           
-## new.MDR              8.206249e-04
+## new.MDR              9.544529e-04
 ## prev.MDR             .           
 ## MDR.tested           .           
-## pop.number           8.126931e-09
-## TB.100k              2.901032e-03
+## pop.number           9.185794e-09
+## TB.100k              2.963968e-03
 ## TB.num               .           
 ## TB_mort.100k         .           
 ## TB_mort.num          .           
-## GDP                 -1.438615e-05</code></pre>
+## GDP                 -1.504581e-05</code></pre>
 <p>Variables with a non-zero coefficient from LASSO will be retained in the model: region, new.MDR, pop.number, TB.100k, and GDP. Therefore, these are the most important predictors of if a country has atleast one case of XDR TB.</p>
 </div>
 <div id="perform-10-fold-cv-using-lasso-model" class="section level1">
@@ -696,7 +696,7 @@ diags &lt;- rbind(diags, class_diag(probs, truth))
 }
 apply(diags, 2, mean) #AVERAGE THE DIAGNOSTICS ACROSS THE 10 FOLDS</code></pre>
 <pre><code>##       acc      sens      spec       ppv       auc 
-## 0.7968379 0.6372475 0.9051233 0.8325397 0.8901019</code></pre>
+## 0.7982213 0.6603030 0.9105697 0.8339286 0.8950259</code></pre>
 <p>This new model’s out of sample accuracy is 0.797 which is fair. It is slightly higher than the previous model’s out of sample accuracy which was 0.743. The AUC also slightly increased from 0.839 to 0.886 (both models are good predictors of if there are XDR TB cases in a country).</p>
 <pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
@@ -746,7 +746,7 @@ zeallot_0.1.0 xml2_1.2.2
 rmarkdown_1.16 httr_1.4.1
 ## [51] rstudioapi_0.10 R6_2.4.0 nlme_3.1-140
 compiler_3.6.1</code></pre>
-<pre><code>## [1] &quot;2019-12-13 10:18:47 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2019-12-13 11:24:23 CST&quot;</code></pre>
 <pre><code>## sysname
 ## &quot;Darwin&quot;
 ## release

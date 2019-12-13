@@ -31,30 +31,30 @@
     </item>
     
     <item>
-      <title>Projects</title>
-      <link>/projects/</link>
-      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project2/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/projects/</guid>
-      <description>Projects Here are some projects I have been working on: - Project 1 - Project 2 </description>
+      <guid>/project2/</guid>
+      <description>Cara (Yijin)Zou  Modeling library(tidyverse) TB_Data&amp;lt;-read.csv(&amp;quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv&amp;quot;, header=T)%&amp;gt;%dplyr::select(-1, -Country.Code)  Introduction This dataset is comprised of a merged dataset from World Health Organization and The World Bank Group. It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars.</description>
     </item>
     
     <item>
       <title>Project 1: Exploratory Data Analysis</title>
       <link>/project1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 20 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/project1/</guid>
       <description>Data Wrangling and Data Exploration Introduction The first two datasets are both from World Health Organization. They contains information about cases of Tuberculosis for different countries including the new cases, previous cases, drug resistant cases, total population, etc. The third dataset is from The World Bank Group which lists the GDP per capita of countries for different years in US dollars. This data is interesting because I am currently in a reserach stream at UT trying to identify potential drugs to treat tuberculosis.</description>
     </item>
     
     <item>
-      <title>Project 2: Modeling, Testing, and Predicting</title>
-      <link>/project2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Projects</title>
+      <link>/projects/</link>
+      <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
-      <guid>/project2/</guid>
-      <description>Cara (Yijin)Zou  Modeling library(tidyverse) TB_Data&amp;lt;-read.csv(&amp;quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv&amp;quot;, header=T)%&amp;gt;%dplyr::select(-1, -Country.Code)  Introduction This dataset is comprised of a merged dataset from World Health Organization and The World Bank Group. It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars.</description>
+      <guid>/projects/</guid>
+      <description>Projects Here are some projects I have been working on: - Project 1 - Project 2 </description>
     </item>
     
   </channel>
