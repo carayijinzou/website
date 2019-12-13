@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resumes on Cara Yijin Zou</title>
+    <link>/resume/</link>
+    <description>Recent content in Resumes on Cara Yijin Zou</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Thu, 12 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/resume/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Resume and About Me</title>
+      <link>/resume/resume-and-about-me/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/resume-and-about-me/</guid>
+      <description> Resume Here is my resume:
+ Resume   </description>
+    </item>
+    
+  </channel>
+</rss>

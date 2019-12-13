@@ -21,6 +21,16 @@
     </item>
     
     <item>
+      <title>Resume and About Me</title>
+      <link>/resume/resume-and-about-me/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/resume-and-about-me/</guid>
+      <description> Resume Here is my resume:
+ Resume   </description>
+    </item>
+    
+    <item>
       <title>Projects</title>
       <link>/projects/</link>
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
@@ -49,6 +59,15 @@
       <guid>/project2/</guid>
       <description>##Cara (Yijin)Zou
 Modeling library(tidyverse) TB_Data&amp;lt;-read.csv(&amp;quot;/Users/yijinzou/Desktop/SDS348Site/content/TB_Data.csv&amp;quot;, header=T)%&amp;gt;%dplyr::select(-1, -Country.Code) #Introduction This dataset is comprised of a merged dataset from World Health Organization and The World Bank Group. It consists of information about cases of Tuberculosis including new pulmonary cases, previous cases, drug resistant cases (MDR and XDR), mortality due to tuberculosis, etc. This dataset also contains information about country, region, year (2017 or 2018), population number, and GDP per capita in US dollars.</description>
+    </item>
+    
+    <item>
+      <title>Resume/About</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>#About Me My name is Cara (Yijin) Zou and I’m currently a junior computational biology major at UT Austin. I’m also a pre-dental student. I’m from Katy, Texas but I’ve also lived in China, Canada, Malaysia, and Singapore! I’m currently involved in research in the Virtual Drug Screening/Virtual Cures stream where I am trying to identify a potential drug for D-alanine D-alanine ligase (Mycobacterium tuberculosis) using both computational and wet lab methods (fun fact: the picture on the home page is a PyMol 3D representation of this enzyme).</description>
     </item>
     
   </channel>

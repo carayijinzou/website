@@ -7,13 +7,9 @@ slug: resume-and-about-me
 tags: []
 categories: []
 ---
+## Resume
 
+Here is my resume: 
 
+- [Resume](/content/resume/Resume-AboutMe.Rmd)
 
-<div id="resume" class="section level2">
-<h2>Resume</h2>
-<p>Here is my resume:</p>
-<ul>
-<li><a href="/content/resume/Resume-AboutMe.Rmd">Resume</a></li>
-</ul>
-</div>
