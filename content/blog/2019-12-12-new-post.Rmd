@@ -8,7 +8,7 @@ tags: []
 description: 'SDS348 Python'
 ---
 
-In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find 3-mers in a sequence and record the frequency number in a dictionary. 
+In addition to R, Python is a valuable tool that can be applied to biology. For example, k-mers are useful in genetics and can be used for a variety of reasons such as sequence assembly, taxonomy, manipulating protein expression, etc. Below is a function that is able to find k-mers in a sequence and record the frequency number in a dictionary. 
 ```{python}
 
 my_seq1 = "CAGCCCAATC"
