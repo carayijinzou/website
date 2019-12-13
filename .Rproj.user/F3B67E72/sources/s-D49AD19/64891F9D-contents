@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://example.com/"
 languageCode = "en-US"
 title = "Cara Yijin Zou"
 # Enable comments by entering your Disqus shortname

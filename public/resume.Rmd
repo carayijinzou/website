@@ -1,40 +1,55 @@
 ---
-title: "Resume/About"
+title: "About Me and Resume"
 author: "Cara Yijin Zou"
 date: "12/12/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r global_options, include=FALSE}
+library(knitr)
+options(tinytex.verbose = TRUE)
+opts_chunk$set(fig.align="center", fig.height=5, message=FALSE, fig.width=8,tidy.opts=list(width.cutoff=60),tidy=TRUE)
 ```
 
-#About Me 
+# About Me 
   My name is Cara (Yijin) Zou and I'm currently a junior computational biology major at UT Austin. I'm also a pre-dental student. I'm from Katy, Texas but I've also lived in China, Canada, Malaysia, and Singapore! I'm currently involved in research in the Virtual Drug Screening/Virtual Cures stream where I am trying to identify a potential drug for D-alanine D-alanine ligase (*Mycobacterium tuberculosis*) using both computational and wet lab methods (fun fact: the picture on the home page is a PyMol 3D representation of this enzyme). 
+  
+# Resume 
+Here is a pdf version of my [resume](/static/Resume Winter 2019.pdf). 
 
 ## Education
 ### Bachelor of Science, Computational Biology   (May 2021)
-University of Texas at Austin 
+#### University of Texas at Austin
+##### University Honors all semesters 
 
-##Interests
-Micah 6 Food Pantry Volunteer  (120+ hours)
-Origami Circle Officer
-Music (Piano, viola, voice)
+## Interests
+Micah 6 Food Pantry Volunteer  (120+ hours)\
+Origami Circle Officer\
+Music (Piano, viola, voice)\
 
-#Skills
-Proficient in Microsoft Office (Word, PowerPoint, and Excel)
-Conversational Proficiency in Chinese (Mandarin)
-Working knowledge in R code (Packages: Base R, Tidyverse) 
-Basic knowledge of Python
+## Skills
+Proficient in Microsoft Office (Word, PowerPoint, and Excel)\
+Conversational Proficiency in Chinese (Mandarin)\
+Working knowledge in R code (Packages: Base R, Tidyverse)\
+Basic knowledge of Python\
 
-#Work Experience
-Undergraduate TA for Biostatistics SDS328M (August 2018 – December 2019)
-Undergraduate Researcher and Mentor (January 2019 – Present)
-Biochemistry (BCH369) PLUS Facilitator (August 2019 – December 2019)
+## Work Experience
+#### Undergraduate TA for Biostatistics SDS328M (August 2018 – December 2019)\
+•	Assisted during lecture and lab sessions by answering questions on statistics and R code; Proctored exams\ 
+•	Graded weekly homework and labs and provided detailed feedback to students for improvement.\ 
 
-#Accomplishments
-College of Natural Sciences 2019 Second Year Excellence Award 
-Honorable Texas Pre-Dental Society Member  
+#### Undergraduate Researcher and Mentor (January 2019 – Present)\
+•	Use of computational methods to identify potential protein inhibitors: PyMOL, Genetic Optimization for Ligand Docking (GOLD)\
+•	Use of wet lab techniques: Midi-prep DNA extraction, agarose gel electrophoresis, DNA sequencing analysis, protein expression, sodium dodecyl sulfate–polyacrylamide (SDS-PAGE) gel electrophoresis, Ni-NTA affinity chromatography, ion exchange chromatography, enzyme assays, site directed mutagenesis, PCR,  Cryopreservation (snap freezing), Differential Scanning Fluorimetry (DSF)\
+•	Volunteer work over summer 2019 (80+ hours) developing protocol for autoinduction expression of gene on pNIC-Bsa4 plasmid and production of competent BL21 cells using CaCl2\
 
-#Contact 
+#### Biochemistry (BCH369) PLUS Facilitator (August 2019 – December 2019)\
+•	Worked in a team to lead study sessions and additional exam review sessions\
+
+## Accomplishments
+College of Natural Sciences 2019 Second Year Excellence Award\
+Honorable Texas Pre-Dental Society Member\
+
+## Contact 
 [cara.yijin.zou@utexas.edu](cara.yijin.zou@utexas.edu)
+
